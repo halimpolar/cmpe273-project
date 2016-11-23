@@ -1,0 +1,31 @@
+{
+  "intents": [
+    {
+      "intent": "AMAZON.HelpIntent", 
+      "slots": []
+    }, 
+    {
+      "intent": "AMAZON.StopIntent", 
+      "slots": []
+    }, 
+    {
+      "intent": "AMAZON.CancelIntent", 
+      "slots": []
+    }, 
+    {
+      "intent": "takeone", 
+      "slots": [
+        {
+          "name": "pizza", 
+          "type": "pizza_type"
+        },
+        {
+          "name": "size", 
+          "type": "size_type"
+        }
+      ]
+    }
+  ]
+}
+
+

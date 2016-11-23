@@ -1,0 +1,4 @@
+takeone	alexa order pizza {pizza}
+takeone	alexa i want pizza {pizza}
+takeone	order pizza {pizza}
+takeone size {size}
