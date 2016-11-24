@@ -52,7 +52,7 @@ def get_takeone_intent_handler(request):
     if menu == "menu":
         reply = reply +"you can order: {0}".format("EXTRAVAGANZZA")
     
-    if pizza_type == None:
+    if pizza_type == None and size == None:
         reply = reply + "I could not find it, if you want me to read menu, say  provide menu"
     
     if pizza_type== "extravaganzza":
