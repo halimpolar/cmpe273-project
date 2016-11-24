@@ -1,9 +1,3 @@
-"""
-In this file we specify default event handlers which are then populated into the handler map using metaprogramming
-Copyright Anjishnu Kumar 2015
-Happy Hacking!
-"""
-
 from ask import alexa
 
 def lambda_handler(request_obj, context=None):
@@ -19,7 +13,6 @@ def lambda_handler(request_obj, context=None):
     ''' inject user relevant metadata into the request if you want to, here.    
     e.g. Something like : 
     ... metadata = {'user_name' : some_database.query_user_name(request.get_user_id())}
-
     Then in the handler function you can do something like -
     ... return alexa.create_response('Hello there {}!'.format(request.metadata['user_name']))
     '''
@@ -42,37 +35,34 @@ def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
 
 
-@alexa.intent_handler('takeone')
-def get_recipe_intent_handler(request):
+@alexa.intent_handler('pizzaorder')
+def get_takeone_intent_handler(request):
     """
     You can insert arbitrary business logic code here    
     """
-
+    reply =""
     # Get variables like userId, slots, intent name etc from the 'Request' object
-    ingredient = request.slots["pizza"] 
+    pizza_type = request.slots["pizza"] 
     size = request.slots["size"] 
+    menu = request.slots["menu"]
     
-    if size == "small":
-        return alexa.create_response("OH u want {0}".format(size),
-                                 end_session=False, card_obj=card)
-    if ingredient == None:
-        return alexa.create_response("I could not find it")
-
-    card = alexa.create_card(title="GetRecipeIntent activated", subtitle=None,
-                             content="asked alexa to find a recipe using {0}".format(ingredient))
+    card = alexa.create_card(title="pizza order activated", subtitle=None,
+                             content="asked alexa to order pizza")
     
-    if ingredient== "extravaganzza":
-        return alexa.create_response("which size?",
+    if menu == "menu":
+        reply = reply +"you can order: {0}".format("EXTRAVAGANZZA")
+    
+    if pizza_type == None:
+        reply = reply + "I could not find it, if you want me to read menu, say  provide menu"
+    
+    if pizza_type== "extravaganzza":
+        if size == None:
+            reply = reply +"which size?"
+        else:
+            reply = reply + "ordering pizza extravaganzza with"
+    
+    if size =="small" or size =="medium" or size=="large" or size =="extra large":
+        reply = reply +"size for your order {0}".format(size)
+       
+    return alexa.create_response(reply,
                                  end_session=False, card_obj=card)
-        
-    else:
-        return alexa.create_response("It is not on the menu",
-                                 end_session=False, card_obj=card)
-
-@alexa.intent_handler('NextRecipeIntent')
-def next_recipe_intent_handler(request):
-    """
-    You can insert arbitrary business logic code here
-    """
-    return alexa.create_response(message="Getting Next Recipe ... 123")
-
