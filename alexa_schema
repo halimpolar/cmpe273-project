@@ -26,9 +26,16 @@
         {
           "name": "menu", 
           "type": "menu_type"
+        },
+        {
+          "name": "crust", 
+          "type": "crust_type"
+        },
+        {
+          "name": "customize", 
+          "type": "customize_type"
         }
       ]
     }
   ]
 }
-
