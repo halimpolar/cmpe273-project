@@ -32,9 +32,14 @@ def lambda_handler(request_obj, context=None):
     Tring to load pizza menus in to global variables
     '''
     menuHandler = MenuHandler()
+    # pizza types
     global PIZZAS
-    for pizza in menuHandler.getMenu():
+    for pizza in menuHandler.getPizzaType():
         PIZZAS.append(pizza[0])
+    # pizza sizes
+    global SIZES
+    for size in menuHandler.getPizzaSize():
+        SIZES.append(size[0])
 
     return alexa.route_request(request_obj, metadata)
 
@@ -55,10 +60,16 @@ def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
 
 
-@alexa.intent_handler("ShowMenu")
-def launch_ShowMenu_handler(request):
+@alexa.intent_handler("ShowPizzaTypes")
+def launch_ShowPizzaTypes_handler(request):
     global PIZZAS
-    return alexa.create_response(message="We provide the menu as the following: {}, {}".format(PIZZAS[0], PIZZAS[1]))
+    return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
+
+
+@alexa.intent_handler("ShowPizzaSizes")
+def launch_ShowPizzaSizes_handler(request):
+    global SIZES
+    return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
 
 
 @alexa.intent_handler('pizzaorder')

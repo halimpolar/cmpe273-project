@@ -1,7 +1,10 @@
 {
   "intents": [
     {
-      "intent": "ShowMenu"
+      "intent": "ShowPizzaTypes"
+    }, 
+    {
+      "intent": "ShowPizzaSizes"
     }, 
     {
       "intent": "AMAZON.HelpIntent", 

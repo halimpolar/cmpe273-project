@@ -8,8 +8,15 @@ class MenuHandler:
         self.sheetName = 'Menu'
         self.service = build('sheets', 'v4', developerKey='AIzaSyCkiKIX1pHyXVZrm5lkuALr9P7cqLwDPW8')
 
-    def getMenu(self):
+    def getPizzaType(self):
         rangeName = self.sheetName + '!A2:A'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+
+    def getPizzaSize(self):
+        rangeName = self.sheetName + '!B2:B'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
@@ -18,6 +25,10 @@ class MenuHandler:
 
 if __name__ == '__main__':
     menuHandler = MenuHandler()
-    menu = menuHandler.getMenu()
-    for pizza in menu:
+    types = menuHandler.getPizzaType()
+    print('Types: ')
+    for pizza in types:
         print("{}".format(pizza[0]))
+    print('Sizes: ')
+    for size in menuHandler.getPizzaSize():
+        print("{}".format(size[0]))
