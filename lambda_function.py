@@ -18,6 +18,9 @@ def lambda_handler(request_obj, context=None):
     '''
     return alexa.route_request(request_obj, metadata)
 
+pizzas = ['extravaganzza']
+sizes = ['small', 'medium','large','extra large']
+crusts = ['handtossed', 'handmadepan','crunchythincrust','brooklynstyle','glutenfree']
 
 @alexa.default_handler()
 def default_handler(request):
@@ -45,24 +48,42 @@ def get_takeone_intent_handler(request):
     pizza_type = request.slots["pizza"] 
     size = request.slots["size"] 
     menu = request.slots["menu"]
+    customize = request.slots["customize"]
+    crust = request.slots["crust"]
     
     card = alexa.create_card(title="pizza order activated", subtitle=None,
                              content="asked alexa to order pizza")
     
     if menu == "menu":
-        reply = reply +"you can order: {0}".format("EXTRAVAGANZZA")
+        reply = reply +"you can order: {0}".format(pizzas)
     
-    if pizza_type == None and size == None and menu == None:
+    if pizza_type == None and size == None and menu == None and customize == None and crust == None:
         reply = reply + "I could not find it, if you want me to read menu, say  provide menu"
     
-    if pizza_type== "extravaganzza":
-        if size == None:
-            reply = reply +"which size?"
+    if pizza_type in pizzas:
+        if size == None and crust == None:
+            reply = reply +"Do you want to customize? say yes customize or say don't customize"
         else:
-            reply = reply + "ordering pizza extravaganzza with"
+            reply = reply + "ordering pizza {0}".format(pizza_type)
+            
+    if customize!= None:
+        if customize == "yes":
+            reply = reply + "what crust do you want?Say hand tossed crust or handmade pan crust or crunchy thin crust or brooklyn stye crust or gluten free crust"
+        else:
+            reply = reply +" with hand tossed crust and size large"
+            
     
-    if size =="small" or size =="medium" or size=="large" or size =="extra large":
-        reply = reply +"size for your order {0}".format(size)
-       
-    return alexa.create_response(reply,
-                                 end_session=False, card_obj=card)
+    if size != None:
+        if size in sizes:
+            reply = reply +" with size for your order {0}".format(size)
+        else:
+            reply = reply + "But i didnt get your size, please say size small, medium, large or extra large"
+    
+    if crust != None:
+        if crust in crusts:
+            reply = reply+"crust is {0}".format(crust)
+            
+        else:
+            reply =reply +"balh blah blah"
+    
+    return alexa.create_response(reply,end_session=False, card_obj=card)
