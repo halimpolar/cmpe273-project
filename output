@@ -15,3 +15,5 @@ pizzaorder provide {menu}
 pizzaorder alexa order pizza {pizza} with size {size}
 pizzaorder alexa order pizza {pizza} having size {size}
 pizzaorder alexa order pizza {pizza} size {size}
+
+ShowMenu show menu
