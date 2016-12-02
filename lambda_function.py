@@ -59,6 +59,14 @@ def launch_request_handler(request):
 def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
 
+@alexa.intent_handler("AskName")
+def launch_AskName_handler(request):
+    import logging
+    logging.error("Im here")
+    name = request.slots["name"]
+	
+    reply = "ordering pizza with name {}".format(name)						 
+    return alexa.create_response(message=reply)
 
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
