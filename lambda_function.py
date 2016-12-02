@@ -5,12 +5,6 @@ from MenuHandler import MenuHandler
 PIZZAS = []
 SIZES = []
 CRUSTS = []
-'''
-PIZZAS = ['extravaganzza']
-SIZES = ['small', 'medium', 'large', 'extra large']
-CRUSTS = ['handtossed', 'handmadepan', 'crunchythincrust','brooklynstyle','glutenfree']
-'''
-
 
 def lambda_handler(request_obj, context=None):
     '''
@@ -73,59 +67,53 @@ def launch_ShowPizzaTypes_handler(request):
     global PIZZAS
     return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
 
+@alexa.intent_handler('ChoosePizzaTypes')
+def get_pizza_type_handler(request):
+    reply=""
+    
+    pizza_type = request.slots["pizza"]
+
+    if pizza_type == None:
+        reply = reply + "I could not find it, if you want me to read menu, say show pizza menu"
+
+    global PIZZAS
+    if pizza_type in PIZZAS:
+        reply = reply +"What size do you want? Say show pizza size for the sizing options"
+
+    return alexa.create_response(reply,end_session=False)
 
 @alexa.intent_handler("ShowPizzaSizes")
 def launch_ShowPizzaSizes_handler(request):
     global SIZES
     return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
 
+@alexa.intent_handler('ChoosePizzaSizes')
+def get_pizza_size_handler(request):
+    reply=""
+    
+    size_type = request.slots["size"]
 
-@alexa.intent_handler('pizzaorder')
-def get_takeone_intent_handler(request):
-    """
-    You can insert arbitrary business logic code here
-    """
-    reply =""
-    # Get variables like userId, slots, intent name etc from the 'Request' object
-    pizza_type = request.slots["pizza"]
-    size = request.slots["size"]
-    menu = request.slots["menu"]
-    customize = request.slots["customize"]
-    crust = request.slots["crust"]
+    if size_type == None:
+        reply = reply + "I could not find it, if you want me to read the pizza size, say show pizza size"
 
-    card = alexa.create_card(title="pizza order activated", subtitle=None,
-                             content="asked alexa to order pizza")
-
-    if menu == "menu":
-        reply = reply +"you can order: {0}".format(pizzas)
-
-    if pizza_type == None and size == None and menu == None and customize == None and crust == None:
-        reply = reply + "I could not find it, if you want me to read menu, say  provide menu"
-
-    if pizza_type in pizzas:
-        if size == None and crust == None:
-            reply = reply +"Do you want to customize? say yes customize or say don't customize"
-        else:
-            reply = reply + "ordering pizza {0}".format(pizza_type)
-
-    if customize!= None:
-        if customize == "yes":
-            reply = reply + "what crust do you want?Say hand tossed crust or handmade pan crust or crunchy thin crust or brooklyn stye crust or gluten free crust"
-        else:
-            reply = reply +" with hand tossed crust and size large"
-
-
-    if size != None:
-        if size in sizes:
-            reply = reply +" with size for your order {0}".format(size)
-        else:
-            reply = reply + "But i didnt get your size, please say size small, medium, large or extra large"
-
-    if crust != None:
-        if crust in crusts:
-            reply = reply+"crust is {0}".format(crust)
-
-        else:
-            reply =reply +"balh blah blah"
+    global SIZES
+    if size_type in SIZES:
+        reply = reply +"What crust do you want? Say show pizza crust for the crust options"
 
     return alexa.create_response(reply,end_session=False, card_obj=card)
+
+@alexa.intent_handler('ChoosePizzaCrusts')
+def get_pizza_crust_handler(request):
+    reply=""
+    
+    crust_type = request.slots["crust"]
+
+    if crust_type == None:
+        reply = reply + "I could not find it, if you want me to read the crust choices, say show crust options
+
+    global CRUSTS
+    if crust_type in CRUSTS:
+        reply = reply +"Do you want to add any toppings?"
+
+    return alexa.create_response(reply,end_session=False, card_obj=card)
+
