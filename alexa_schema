@@ -7,6 +7,12 @@
       "intent": "ShowPizzaSizes"
     }, 
     {
+      "intent": "ShowPizzaCrusts"
+    }, 
+    {
+      "intent": "ShowPizzaToppings"
+    }, 
+    {
       "intent": "AMAZON.HelpIntent", 
       "slots": []
     }, 

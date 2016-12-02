@@ -18,3 +18,5 @@ pizzaorder alexa order pizza {pizza} size {size}
 
 ShowPizzaTypes show pizza types
 ShowPizzaSizes show pizza sizes
+ShowPizzaCrusts show pizza crusts
+ShowPizzaToppings show pizza toppings

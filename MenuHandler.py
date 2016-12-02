@@ -8,15 +8,29 @@ class MenuHandler:
         self.sheetName = 'Menu'
         self.service = build('sheets', 'v4', developerKey='AIzaSyCkiKIX1pHyXVZrm5lkuALr9P7cqLwDPW8')
 
-    def getPizzaType(self):
+    def getPizzaTypes(self):
         rangeName = self.sheetName + '!A2:A'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return values
 
-    def getPizzaSize(self):
+    def getPizzaSizes(self):
         rangeName = self.sheetName + '!B2:B'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+
+    def getPizzaCrusts(self):
+        rangeName = self.sheetName + '!C2:C'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+
+    def getPizzaToppings(self):
+        rangeName = self.sheetName + '!D2:D'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])

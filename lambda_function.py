@@ -5,11 +5,7 @@ from MenuHandler import MenuHandler
 PIZZAS = []
 SIZES = []
 CRUSTS = []
-'''
-PIZZAS = ['extravaganzza']
-SIZES = ['small', 'medium', 'large', 'extra large']
-CRUSTS = ['handtossed', 'handmadepan', 'crunchythincrust','brooklynstyle','glutenfree']
-'''
+TOPPINGS = []
 
 
 def lambda_handler(request_obj, context=None):
@@ -34,12 +30,20 @@ def lambda_handler(request_obj, context=None):
     menuHandler = MenuHandler()
     # pizza types
     global PIZZAS
-    for pizza in menuHandler.getPizzaType():
+    for pizza in menuHandler.getPizzaTypes():
         PIZZAS.append(pizza[0])
     # pizza sizes
     global SIZES
-    for size in menuHandler.getPizzaSize():
+    for size in menuHandler.getPizzaSizes():
         SIZES.append(size[0])
+    # pizza crusts
+    global CRUSTS
+    for crust in menuHandler.getPizzaCrusts():
+        CRUSTS.append(crust[0])
+    # pizza toppings
+    global TOPPINGS
+    for topping in menuHandler.getPizzaToppings():
+        TOPPINGS.append(topping[0])
 
     return alexa.route_request(request_obj, metadata)
 
@@ -70,6 +74,18 @@ def launch_ShowPizzaTypes_handler(request):
 def launch_ShowPizzaSizes_handler(request):
     global SIZES
     return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
+
+
+@alexa.intent_handler("ShowPizzaCrusts")
+def launch_ShowPizzaCrusts_handler(request):
+    global CRUSTS
+    return alexa.create_response(message="pizza crusts: {}, {}".format(CRUSTS[0], CRUSTS[1]))
+
+
+@alexa.intent_handler("ShowPizzaToppings")
+def launch_ShowPizzaToppings_handler(request):
+    global TOPPINGS
+    return alexa.create_response(message="pizza toppings: {}, {}".format(TOPPINGS[0], TOPPINGS[1]))
 
 
 @alexa.intent_handler('pizzaorder')
