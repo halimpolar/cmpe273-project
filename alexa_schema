@@ -7,6 +7,14 @@
       "intent": "ShowPizzaSizes"
     }, 
     {
+      "intent": "AskName", 
+      "slots": [
+        {
+          "name": "name", 
+          "type": "name_type"
+        }]
+    }, 
+    {
       "intent": "AMAZON.HelpIntent", 
       "slots": []
     }, 
