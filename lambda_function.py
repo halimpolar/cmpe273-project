@@ -1,7 +1,7 @@
 from ask import alexa
 from MenuHandler import MenuHandler
 
-
+HasLoaded = False
 PIZZAS = []
 SIZES = []
 CRUSTS = []
@@ -34,23 +34,28 @@ def lambda_handler(request_obj, context=None):
     '''
     Tring to load pizza menus in to global variables
     '''
-    menuHandler = MenuHandler()
-    # pizza types
-    global PIZZAS
-    for pizza in menuHandler.getPizzaTypes():
-        PIZZAS.append(pizza[0])
-    # pizza sizes
-    global SIZES
-    for size in menuHandler.getPizzaSizes():
-        SIZES.append(size[0])
-    # pizza crusts
-    global CRUSTS
-    for crust in menuHandler.getPizzaCrusts():
-        CRUSTS.append(crust[0])
-    # pizza toppings
-    global TOPPINGS
-    for topping in menuHandler.getPizzaToppings():
-        TOPPINGS.append(topping[0])
+    global HasLoaded
+    if not HasLoaded:
+        menuHandler = MenuHandler()
+        # pizza types
+        global PIZZAS
+        for pizza in menuHandler.getPizzaTypes():
+            PIZZAS.append(pizza[0])
+        # pizza sizes
+        global SIZES
+        for size in menuHandler.getPizzaSizes():
+            SIZES.append(size[0])
+        # pizza crusts
+        global CRUSTS
+        for crust in menuHandler.getPizzaCrusts():
+            CRUSTS.append(crust[0])
+        # pizza toppings
+        global TOPPINGS
+        for topping in menuHandler.getPizzaToppings():
+            TOPPINGS.append(topping[0])
+        # set flag to true
+        global HasLoaded
+        HasLoaded = True
 
     return alexa.route_request(request_obj, metadata)
 
