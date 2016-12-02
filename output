@@ -16,11 +16,20 @@ pizzaorder alexa order pizza {pizza} with size {size}
 pizzaorder alexa order pizza {pizza} having size {size}
 pizzaorder alexa order pizza {pizza} size {size}
 
-ShowPizzaTypes show pizza types
-ShowPizzaSizes show pizza sizes
-
 AskName my name is {name}
 AskName I'm {name}
 AskName I am {name}
 AskName it's {name}
 AskName it is {name}
+
+ShowPizzaTypes show pizza types
+ChoosePizzaTypes I want {pizza}
+ChoosePizzaTypes I want {pizza} pizza
+
+ShowPizzaSizes show pizza sizes
+ChoosePizzaSizes I want {size}
+ChoosePizzaSizes I want {size} pizza
+
+ShowPizzaCrusts show pizza crusts
+ChoosePizzaCrusts I want {crust}
+ChoosePizzaCrusts I want {crust} crust
