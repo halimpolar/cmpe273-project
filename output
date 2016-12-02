@@ -18,3 +18,9 @@ pizzaorder alexa order pizza {pizza} size {size}
 
 ShowPizzaTypes show pizza types
 ShowPizzaSizes show pizza sizes
+
+AskName my name is {name}
+AskName I'm {name}
+AskName I am {name}
+AskName it's {name}
+AskName it is {name}
