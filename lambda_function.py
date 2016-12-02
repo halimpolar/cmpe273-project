@@ -6,6 +6,13 @@ PIZZAS = []
 SIZES = []
 CRUSTS = []
 TOPPINGS = []
+ORDER = {
+    'name': None,
+    'type': None,
+    'size': None,
+    'crusts': None,
+    'toppings': None
+}
 
 
 def lambda_handler(request_obj, context=None):
@@ -137,3 +144,18 @@ def get_takeone_intent_handler(request):
             reply =reply +"balh blah blah"
 
     return alexa.create_response(reply,end_session=False, card_obj=card)
+
+
+# check the information we want before writting to sheet
+def hasEnoughInfo():
+    global ORDER
+    for key in ORDER.keys():
+        if ORDER[key] is None:
+            return False, key
+    return True
+
+
+# after we get all the information, write order to the sheet
+def placeOrder():
+    # TODO place order to sheet
+    pass
