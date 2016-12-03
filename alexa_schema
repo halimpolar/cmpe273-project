@@ -10,9 +10,6 @@
       "intent": "ShowPizzaCrusts"
     },
     {
-      "intent": "ShowPizzaCrusts"
-    }, 
-    {
       "intent": "ShowPizzaToppings"
     }, 
     {
@@ -27,6 +24,14 @@
       "intent": "AMAZON.CancelIntent", 
       "slots": []
     }, 
+    {
+      "intent": "AskName", 
+      "slots": [
+        {
+          "name": "name", 
+          "type": "name_type"
+        }]
+    },
     {
       "intent": "ChoosePizzaTypes", 
       "slots": 
