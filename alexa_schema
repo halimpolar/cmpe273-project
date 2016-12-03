@@ -25,6 +25,14 @@
       "slots": []
     }, 
     {
+      "intent": "AskName", 
+      "slots": [
+        {
+          "name": "name", 
+          "type": "name_type"
+        }]
+    },
+    {
       "intent": "ChoosePizzaTypes", 
       "slots": 
       [
