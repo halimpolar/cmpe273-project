@@ -75,14 +75,23 @@ def launch_request_handler(request):
 def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
 
+
+@alexa.intent_handler("WritingSheetTest")
+def launch_WritingSheet_handler(request):
+    orderHandler = OrderHandler()
+    orderHandler.placeOrder()
+    return alexa.create_response(message="testing writing to sheet")
+
+
 @alexa.intent_handler("AskName")
 def launch_AskName_handler(request):
     #global menuHandler
     name = request.slots["name"]
-	
+
     reply = "ordering pizza with name {}".format(name)
     #menuHandler.write(name)
     return alexa.create_response(message=reply)
+
 
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
