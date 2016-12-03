@@ -5,7 +5,10 @@
     }, 
     {
       "intent": "ShowPizzaSizes"
-    }, 
+    },
+    {
+      "intent": "ShowPizzaCrusts"
+    },
     {
       "intent": "ShowPizzaCrusts"
     }, 
@@ -25,27 +28,32 @@
       "slots": []
     }, 
     {
-      "intent": "pizzaorder", 
-      "slots": [
+      "intent": "ChoosePizzaTypes", 
+      "slots": 
+      [
         {
           "name": "pizza", 
           "type": "pizza_type"
-        },
+        }
+      ]
+    },
+    {
+      "intent": "ChoosePizzaSizes", 
+      "slots": 
+      [
         {
           "name": "size", 
           "type": "size_type"
-        },
-        {
-          "name": "menu", 
-          "type": "menu_type"
-        },
+        }
+      ]
+    },
+    {
+      "intent": "ChoosePizzaCrusts", 
+      "slots": 
+      [
         {
           "name": "crust", 
           "type": "crust_type"
-        },
-        {
-          "name": "customize", 
-          "type": "customize_type"
         }
       ]
     }
