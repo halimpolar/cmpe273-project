@@ -5,6 +5,12 @@ from MenuHandler import MenuHandler
 PIZZAS = []
 SIZES = []
 CRUSTS = []
+'''
+PIZZAS = ['extravaganzza']
+SIZES = ['small', 'medium', 'large', 'extra large']
+CRUSTS = ['handtossed', 'handmadepan', 'crunchythincrust','brooklynstyle','glutenfree']
+'''
+
 
 def lambda_handler(request_obj, context=None):
     '''
@@ -53,14 +59,6 @@ def launch_request_handler(request):
 def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
 
-@alexa.intent_handler("AskName")
-def launch_AskName_handler(request):
-    import logging
-    logging.error("Im here")
-    name = request.slots["name"]
-	
-    reply = "ordering pizza with name {}".format(name)						 
-    return alexa.create_response(message=reply)
 
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
@@ -69,8 +67,8 @@ def launch_ShowPizzaTypes_handler(request):
 
 @alexa.intent_handler('ChoosePizzaTypes')
 def get_pizza_type_handler(request):
-    reply=""
     
+    reply=""
     pizza_type = request.slots["pizza"]
 
     if pizza_type == None:
@@ -79,8 +77,8 @@ def get_pizza_type_handler(request):
     global PIZZAS
     if pizza_type in PIZZAS:
         reply = reply +"What size do you want? Say show pizza size for the sizing options"
-
-    return alexa.create_response(reply,end_session=False)
+    
+    return alexa.create_response(message=reply)
 
 @alexa.intent_handler("ShowPizzaSizes")
 def launch_ShowPizzaSizes_handler(request):
@@ -100,7 +98,7 @@ def get_pizza_size_handler(request):
     if size_type in SIZES:
         reply = reply +"What crust do you want? Say show pizza crust for the crust options"
 
-    return alexa.create_response(reply,end_session=False, card_obj=card)
+    return alexa.create_response(reply,end_session=False)
 
 @alexa.intent_handler('ChoosePizzaCrusts')
 def get_pizza_crust_handler(request):
@@ -109,11 +107,10 @@ def get_pizza_crust_handler(request):
     crust_type = request.slots["crust"]
 
     if crust_type == None:
-        reply = reply + "I could not find it, if you want me to read the crust choices, say show crust options
+        reply = reply + "I could not find it, if you want me to read the crust choices, say show crust options"
 
     global CRUSTS
     if crust_type in CRUSTS:
         reply = reply +"Do you want to add any toppings?"
 
-    return alexa.create_response(reply,end_session=False, card_obj=card)
-
+    return alexa.create_response(reply,end_session=False)
