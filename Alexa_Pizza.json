@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "alexa-pizza",
+  "private_key_id": "69e65edf4ace6d77a552b3b70495242ee8105a73",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDekbdmn+JYpxDo\nsdDXZb51H1AS4M42yziXQ02CQmlZKLeimFNtQBL9QWIp8GqH+sXYygYTcsk3GMmY\n57zmpjUuzME9JNx3An2RqnLlg+0QmS2VhSpjHMsOdhIhGgYv9+LZlwm6/JgjQSMA\nYH7m03xmuIv1NdHRXlDJjiLfsl7BCPhOTu7L91LxfWYdEAJLsOTFOOkETMKfTf2I\nD1fS04sfNlt2eOl6UaVw4Cevkh/d0xIJFDiJflcm7Gckmssrwcu5xGRuSb2Rv47A\nUfG/AmbvUxX2fDpVc4qhuO1IGyrMR2crtS4Dofik62i+O47AvbxMUdHjzqtD018m\nu1wJvUg7AgMBAAECggEBALe6aj9ZNKwiHZ85SkDFSJe+pYcv9Ire73ROpqkk0Xo8\nVnrua8//2K0fUD12rTpbFP+EpcdgNiI5YBHNGu77vWNIuywSRbwoXiflILu+T/An\nwq1vJDJ1Dlp9tTGGHh1y79zXBb1Jzv0rRA2HmrpJUqQpK7/cEbxXszDvGHK49+c4\nShwexjrBdbHepDoSRggGLmWcqjuLEKqAHixafxs6VZjQvNEXkzPDvAv33ZNZNlb9\n1wcRE2jvkx/JX15n52IaY4J4Ay6A3nHQi79p7jCuT2+h67+dQ2FzTq+w7j8by/8A\n3L888um3+dpEwsQw6MzPCeGbwXUdRYZtPVEN21vqwCECgYEA9fsGHbJH7lC5xemk\nTC5JQPCMJ3y3rzChDxHAvdqIw8o3erFmPfn5qkmJR3AcrgzgLrjOFq6DvkFvfjkm\nZzjtVt91I1ldppmmpUA9Iwc50PJKfLcY580R78C3wv1w6E9ahT6wIoDkCBqhdinN\ndh7qF2vyqPWearNIF3z+0megyx0CgYEA56KRvCPQIuAm8xUzMTEz0qP1dXUVZ/nU\nbkyMhGcgi+vb5DmXX0NJijstHRrWyGkSUVF8HzIqaKvP7oEosHIXwah+W6UFKisT\nMEDHRWvhV9HozXs7tgYgJtFVhIotbzOOglbk+I0epPNOtmdJ3Q7QfUHclKUh/Kvw\nR82466IyKTcCgYEAprnH0ncVxFWZJamQwEYbRtYE2Xrycd9vO2yYDNdEHhlBc3ss\nxtNZw29mijJWbi6yAVkn7z3IdDucG50XB54RWPHLTvNyw8qfpqCdD9IFAThI/rGI\nQw2/m5cvtw3b6spmm6v67NgaN9f9Gr+I0QhxOQDlEFqzTrVIJwuFGQ4+cY0CgYEA\nmMAaPumXDginZtHqKlx6AkRhUA3gCes0bXBJkd64Fc15+q0H56hlzKRtga37SboQ\nfFOx+JiKYvA6dNvzyzfR9sF4YlMWbtJtGvr87gjQV6tzTF4h6E1t0mtla7v7bkOf\njNBkuovFU52noJ3IleB5GMDgB55GJWv1TkSZ17nkPk0CgYBVOilUuM2UJ71X0xgd\nNJZ9jQcpC7mir2GvMKQCLJKb/AXSZMqQ5+/7/KQL5Bj4/XOZk79flhiz8bOy9JXC\nq6VArbSrHlX2YU2CqlAvyts8dPESDyetis5fmYE3Xd85VCcCvom4Js8mv+up6x6V\nMGIN76xZvFQ8xd6WQ4jtPpelmQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "alexa-pizza@alexa-pizza.iam.gserviceaccount.com",
+  "client_id": "101156217326696001582",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/alexa-pizza%40alexa-pizza.iam.gserviceaccount.com"
+}
