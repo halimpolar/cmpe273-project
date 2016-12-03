@@ -1,5 +1,6 @@
 from ask import alexa
 from MenuHandler import MenuHandler
+from OrderHandler import OrderHandler
 
 HasLoaded = False
 PIZZAS = []
@@ -54,7 +55,6 @@ def lambda_handler(request_obj, context=None):
         for topping in menuHandler.getPizzaToppings():
             TOPPINGS.append(topping[0])
         # set flag to true
-        global HasLoaded
         HasLoaded = True
 
     return alexa.route_request(request_obj, metadata)
