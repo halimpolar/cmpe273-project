@@ -8,7 +8,7 @@ Menu List: https://docs.google.com/spreadsheets/d/1rJ6-8LPsQJFXMeQVC-RfruSuF5IQO
 Jusk upload 'Pizza_Lambda.zip' to Lambda and make sure schema and utterances are as same as the ones which are alexa_schema and output
 
 SLOTS:  
-Type	             Values	
+Type	             Values  	
 crust_type	        crust  
 name_type	          name  
 pizza_type	        pizza  
