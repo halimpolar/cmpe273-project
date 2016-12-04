@@ -12,7 +12,7 @@ ORDER = {
     'name': None,
     'type': None,
     'size': None,
-    # 'crusts': None
+    'crusts': None,
     # 'toppings': None
     'bake': None
 }
@@ -161,14 +161,19 @@ def launch_ShowPizzaToppings_handler(request):
 
 @alexa.intent_handler('ChoosePizzaCrusts')
 def get_pizza_crust_handler(request):
-    reply = ""
-    crust_type = request.slots["crust"]
-    if crust_type is None:
-        reply = reply + "I could not find it, if you want me to read the crust choices, say show crust options"
+    crust = request.slots["crust"]
+    reply = "your crust will be " + crust + ". "
     global CRUSTS
-    if crust_type in CRUSTS:
-        reply = reply + "Do you want to add any toppings?"
-    return alexa.create_response(reply, end_session=False, card_obj=card)
+    if crust in CRUSTS:
+        reply = "Ok, pizza crust will be " + crust + ". "
+        # save crust into order
+        global ORDER
+        ORDER['crust'] = crust
+        reply += checkIsReady()
+        return alexa.create_response(message=reply)
+    else:
+        reply = "I could not find it, if you want me to read the crust choices, say show crust options"
+        return alexa.create_response(message=reply)
 
 
 @alexa.intent_handler('ChoosePizzaBakes')
@@ -201,11 +206,11 @@ def checkIsReady():
             return 'Please choose a type of pizza. '
         elif key is 'size':
             return 'Please choose the size for the pizza. '
+        elif key is 'crusts':
+            return 'Please choose the crust for the pizza.'
         elif key is 'bake':
             return 'How would you like your pizza to bake, well done or normal? '
         '''
-        elif key is 'crusts':
-            return 'Please choose the crust for the pizza.'
         elif key is 'toppings':
             return 'Do you want any topping?'
         '''
