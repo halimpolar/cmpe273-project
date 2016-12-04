@@ -13,3 +13,4 @@ crust_type	        crust
 name_type	          name  
 pizza_type	        pizza  
 size_type	          size  
+bake_type           bake  
