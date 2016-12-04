@@ -66,5 +66,15 @@
         }
       ]
     }
+    {
+      "intent": "ChooseToppings", 
+      "slots": 
+      [
+        {
+          "name": "topping", 
+          "type": "topping_type"
+        }
+      ]
+    }
   ]
 }
