@@ -13,38 +13,45 @@ class MenuHandler:
         http_auth = credentials.authorize(Http())
         self.service = build('sheets', 'v4', http=http_auth)
         self.sheetID = '1rJ6-8LPsQJFXMeQVC-RfruSuF5IQO57Oujvl2FHjgR8'
-        self.sheetName = 'Menu'
+        self.sheetName = 'ActualMenu'
 
     def getPizzaTypes(self):
-        rangeName = self.sheetName + '!A2:A'
+        rangeName = self.sheetName + '!O2:O'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return values
 
     def getPizzaSizes(self):
-        rangeName = self.sheetName + '!B2:B'
-        result = self.service.spreadsheets().values().get(
-            spreadsheetId=self.sheetID, range=rangeName).execute()
-        values = result.get('values', [])
-        return values
-
-    def getPizzaCrusts(self):
         rangeName = self.sheetName + '!C2:C'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return values
 
+    def getPizzaCrusts(self):
+        rangeName = self.sheetName + '!A2:A'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+
     def getPizzaToppings(self):
-        rangeName = self.sheetName + '!D2:D'
+        rangeName = self.sheetName + '!M2:M'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return values
 
     def getPizzaBakes(self):
-        rangeName = 'ActualMenu' + '!G2:G'
+        rangeName = self.sheetName + '!G2:G'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+
+    def getPizzaSauces(self):
+        rangeName = self.sheetName + '!E2:E'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
