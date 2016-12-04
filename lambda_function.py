@@ -94,7 +94,8 @@ def session_ended_request_handler(request):
 @alexa.intent_handler("WritingSheetTest")
 def launch_WritingSheet_handler(request):
     orderHandler = OrderHandler()
-    orderHandler.placeOrder()
+    global ORDER
+    orderHandler.placeOrder(ORDER)
     return alexa.create_response(message="testing writing to sheet")
 
 
@@ -241,9 +242,9 @@ def launch_ChoosePizzaToppings_handler(request):
 	    ORDER['topping3'] = "none"
 	    ORDER['topping4'] = "none"
 	    ORDER['topping5'] = "none"
-    	reply = "okay, no more toppings added."
-    	return alexa.create_response(message=reply)
-    else
+	    reply = "okay, no more toppings added."
+	    return alexa.create_response(message=reply)
+    else:
     	reply = "you want your second topping is " + topping + ". "
     global TOPPINGS
     if topping in TOPPINGS:
@@ -264,9 +265,9 @@ def launch_ChoosePizzaToppings_handler(request):
 	    ORDER['topping3'] = "none"
 	    ORDER['topping4'] = "none"
 	    ORDER['topping5'] = "none"
-    	reply = "okay, no more toppings added."
-    	return alexa.create_response(message=reply)
-    else
+	    reply = "okay, no more toppings added."
+	    return alexa.create_response(message=reply)
+    else:
     	reply = "you want your third topping is " + topping + ". "
     global TOPPINGS
     if topping in TOPPINGS:
@@ -286,9 +287,9 @@ def launch_ChoosePizzaToppings_handler(request):
     if (topping == "no more" or topping == "none"):
 	    ORDER['topping4'] = "none"
 	    ORDER['topping5'] = "none"
-    	reply = "okay, no more toppings added."
-    	return alexa.create_response(message=reply)
-    else
+	    reply = "okay, no more toppings added."
+	    return alexa.create_response(message=reply)
+    else:
     	reply = "you want your fourth topping is " + topping + ". "
     global TOPPINGS
     if topping in TOPPINGS:
@@ -307,9 +308,9 @@ def launch_ChoosePizzaToppings_handler(request):
     topping = request.slots["topping5"]
     if (topping == "no more" or topping == "none"):
 	    ORDER['topping5'] = "none"
-    	reply = "okay, no more toppings added."
-    	return alexa.create_response(message=reply)
-    else
+	    reply = "okay, no more toppings added."
+	    return alexa.create_response(message=reply)
+    else:
     	reply = "you want your fifth topping is " + topping + ". "
     global TOPPINGS
     if topping in TOPPINGS:
