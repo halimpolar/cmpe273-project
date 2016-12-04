@@ -44,27 +44,27 @@ def lambda_handler(request_obj, context=None):
         # pizza types
         global PIZZAS
         for pizza in menuHandler.getPizzaTypes():
-            PIZZAS.append(pizza[0])
+            PIZZAS.append(pizza[0].lower())
         # pizza sizes
         global SIZES
         for size in menuHandler.getPizzaSizes():
-            SIZES.append(size[0])
+            SIZES.append(size[0].lower())
         # pizza crusts
         global CRUSTS
         for crust in menuHandler.getPizzaCrusts():
-            CRUSTS.append(crust[0])
+            CRUSTS.append(crust[0].lower())
         # pizza bakes
         global BAKES
         for bake in menuHandler.getPizzaBakes():
-            BAKES.append(bake[0])
+            BAKES.append(bake[0].lower())
         # pizza sauces
         global SAUCES
         for sauce in menuHandler.getPizzaSauces():
-            SAUCES.append(sauce[0])
+            SAUCES.append(sauce[0].lower())
         # pizza toppings
         global TOPPINGS
         for topping in menuHandler.getPizzaToppings():
-            TOPPINGS.append(topping[0])
+            TOPPINGS.append(topping[0].lower())
         # set flag to true
         HasLoaded = True
 
