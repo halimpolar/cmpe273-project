@@ -12,7 +12,7 @@ ORDER = {
     'name': None,
     'type': None,
     'size': None,
-    'crusts': None,
+    'crust': None,
     # 'toppings': None
     'bake': None
 }
@@ -104,6 +104,15 @@ def launch_AskName_handler(request):
 
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
+    '''
+    global PIZZAS
+    content = ''
+    for pizza in PIZZAS:
+        content += pizza + ' '
+    card = alexacreate_card(title="Pizza Types", subtitle=None, content=content)
+    return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]),
+                                 end_session=False, card_obj=card)
+    '''
     global PIZZAS
     return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
 
@@ -179,7 +188,7 @@ def get_pizza_crust_handler(request):
 @alexa.intent_handler('ChoosePizzaBakes')
 def launch_ChoosePizzaBake_handler(request):
     bake = request.slots["bake"]
-    reply = "you want your pizza to be baked in " + bake + ".` "
+    reply = "you want your pizza to be baked in " + bake + ". "
     global BAKES
     if bake in BAKES:
         reply = "Ok, pizza will be baked in " + bake + ". "
@@ -206,8 +215,8 @@ def checkIsReady():
             return 'Please choose a type of pizza. '
         elif key is 'size':
             return 'Please choose the size for the pizza. '
-        elif key is 'crusts':
-            return 'Please choose the crust for the pizza.'
+        elif key is 'crust':
+            return 'Please choose the crust for the pizza. '
         elif key is 'bake':
             return 'How would you like your pizza to bake, well done or normal? '
         '''
