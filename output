@@ -1,21 +1,3 @@
-pizzaorder	alexa order pizza {pizza}
-pizzaorder	alexa i want pizza {pizza}
-pizzaorder	order pizza {pizza}
-
-pizzaorder	alexa order pizza {pizza} with {crust} crust
-pizzaorder	alexa i want pizza {pizza} with {crust} crust
-pizzaorder	order pizza {pizza} with {crust} crust 
-pizzaorder	alexa order pizza {pizza} and {crust} crust
-pizzaorder	alexa i want pizza {pizza} and {crust} crust
-pizzaorder	order pizza {pizza} and {crust} crust 
-pizzaorder	{customize} customize 
-pizzaorder  size {size}
-pizzaorder {crust} crust
-pizzaorder provide {menu}
-pizzaorder alexa order pizza {pizza} with size {size}
-pizzaorder alexa order pizza {pizza} having size {size}
-pizzaorder alexa order pizza {pizza} size {size}
-
 AskName my name is {name}
 AskName I'm {name}
 AskName I am {name}
@@ -25,10 +7,12 @@ AskName it is {name}
 ShowPizzaTypes show pizza types
 ShowPizzaSizes show pizza sizes
 ShowPizzaCrusts show pizza crusts
+ShowPizzaSauces show pizza sauces
 ShowPizzaToppings show pizza toppings
 
 ChoosePizzaTypes I want {pizza}
-ChoosePizzaTypes I want {pizza} pizza
 ChoosePizzaSizes I want {size} pizza
+ChoosePizzaBakes I want pizza baked in {bake}
+ChoosePizzaCrusts I want {crust} crust
 
 WritingSheetTest test writing

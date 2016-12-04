@@ -13,19 +13,10 @@
       "intent": "ShowPizzaCrusts"
     },
     {
+      "intent": "ShowPizzaSauces"
+    },
+    {
       "intent": "ShowPizzaToppings"
-    }, 
-    {
-      "intent": "AMAZON.HelpIntent", 
-      "slots": []
-    }, 
-    {
-      "intent": "AMAZON.StopIntent", 
-      "slots": []
-    }, 
-    {
-      "intent": "AMAZON.CancelIntent", 
-      "slots": []
     }, 
     {
       "intent": "AskName", 
@@ -62,6 +53,16 @@
         {
           "name": "crust", 
           "type": "crust_type"
+        }
+      ]
+    },
+    {
+      "intent": "ChoosePizzaBakes", 
+      "slots": 
+      [
+        {
+          "name": "bake", 
+          "type": "bake_type"
         }
       ]
     }
