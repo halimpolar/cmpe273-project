@@ -7,12 +7,14 @@ PIZZAS = []
 SIZES = []
 CRUSTS = []
 TOPPINGS = []
+BAKES = []
 ORDER = {
     'name': None,
     'type': None,
-    'size': None
+    'size': None,
     # 'crusts': None
     # 'toppings': None
+    'bake': None
 }
 
 
@@ -54,6 +56,10 @@ def lambda_handler(request_obj, context=None):
         global TOPPINGS
         for topping in menuHandler.getPizzaToppings():
             TOPPINGS.append(topping[0])
+        # pizza bakes
+        global BAKES
+        for bake in menuHandler.getPizzaBakes():
+            BAKES.append(bake[0])
         # set flag to true
         HasLoaded = True
 
@@ -165,19 +171,38 @@ def get_pizza_crust_handler(request):
     return alexa.create_response(reply, end_session=False, card_obj=card)
 
 
+@alexa.intent_handler('ChoosePizzaBakes')
+def launch_ChoosePizzaBake_handler(request):
+    bake = request.slots["bake"]
+    reply = "you want your pizza to be baked in " + bake + ".` "
+    global BAKES
+    if bake in BAKES:
+        reply = "Ok, pizza will be baked in " + bake + ". "
+        # save bake into order
+        global ORDER
+        ORDER['bake'] = bake
+        reply += checkIsReady()
+        return alexa.create_response(message=reply)
+    else:
+        reply = "I could not find it, if you want me to read menu, say 'show pizza bakes'"
+        return alexa.create_response(message=reply)
+
+
 # check the order and reply to user
 def checkIsReady():
     isReady, key = hasEnoughInfo()
     if isReady:
         placeOrder()
-        return 'Order is ready, Thank you!'
+        return 'Order is ready, Thank you! '
     else:
         if key is 'name':
-            return 'Please tell me your name.'
+            return 'Please tell me your name. '
         elif key is 'type':
-            return 'Please choose a type of pizza.'
+            return 'Please choose a type of pizza. '
         elif key is 'size':
-            return 'Please choose the size for the pizza.'
+            return 'Please choose the size for the pizza. '
+        elif key is 'bake':
+            return 'How would you like your pizza to bake, well done or normal? '
         '''
         elif key is 'crusts':
             return 'Please choose the crust for the pizza.'

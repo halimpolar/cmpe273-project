@@ -20,7 +20,7 @@ class OrderHandler:
         values = [
             [
                 # order['name'], order['type'], order['size'], order['crusts'], order['toppings']
-                order['name'], order['type'], order['size'], '', ''
+                order['name'], order['type'], order['size'], '', '', order['bake']
             ]
         ]
         body = {

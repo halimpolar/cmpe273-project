@@ -43,6 +43,13 @@ class MenuHandler:
         values = result.get('values', [])
         return values
 
+    def getPizzaBakes(self):
+        rangeName = 'ActualMenu' + '!G2:G'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+
 
 if __name__ == '__main__':
     menuHandler = MenuHandler()
