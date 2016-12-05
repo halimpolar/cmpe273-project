@@ -191,6 +191,30 @@ def launch_ShowBakes_handler(request):
     for x in BAKES:
         r = r + '{},'.format(x)
     return alexa.create_response(message=r)
+	
+@alexa.intent_handler("OrderStatus")
+def launch_OrderStatus_handler(request):
+    o = int(request.slots["order"])
+    orderHandler = OrderHandler()
+    existing_order =[]
+    for e in orderHandler.getOrderNumbers():
+        existing_order.append(e[0])
+    
+    if str(o) in existing_order:
+        temp = o+1
+        sheet = '!AC'+str(temp)+':AC'+str(temp)
+        values = int(((orderHandler.getOrderNumbers(sheet))[0])[0])
+
+        import time
+        if (values + 15*60) > time.time():
+            min = round(int((((values + 15*60) - time.time())/60)))
+            reply  = 'Your order will be ready in roughly '+str(min)[0:2]+' minutes' 
+        else:
+            reply  = 'Your order is ready! Go grab it.' 
+	    
+    else:
+        reply = 'Im sorry I dont have that order'	
+    return alexa.create_response(message=reply)
 ''' Showing '''
 
 
