@@ -88,7 +88,7 @@ def default_handler(request):
 
 @alexa.request_handler("LaunchRequest")
 def launch_request_handler(request):
-    return alexa.create_response(message="Hello Welcome to the Pizza Ordering System")
+    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System")
 
 
 @alexa.request_handler("SessionEndedRequest")
@@ -101,7 +101,7 @@ def launch_AskName_handler(request):
     # global menuHandler
     name = request.slots["name"]
 
-    reply = "ordering pizza with name {}".format(name)
+    reply = "Hi {} .".format(name)
     # write name into Order
     global ORDER
     ORDER['name'] = name
@@ -112,27 +112,35 @@ def launch_AskName_handler(request):
 ''' Showing '''
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
+    r = "pizza toppings are "
     global PIZZAS
-    return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
-
+    for x in PIZZAS:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaCrusts")
 def launch_ShowPizzaCrusts_handler(request):
+    r = "pizza toppings are "
     global CRUSTS
-    return alexa.create_response(message="pizza crusts: {}, {}".format(CRUSTS[0], CRUSTS[1]))
-
+    for x in CRUSTS:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaToppings")
 def launch_ShowPizzaToppings_handler(request):
+    r = "pizza toppings are "
     global TOPPINGS
-    return alexa.create_response(message="pizza toppings: {}, {}".format(TOPPINGS[0], TOPPINGS[1]))
-
+    for x in TOPPINGS:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaSizes")
 def launch_ShowPizzaSizes_handler(request):
+    r = "pizza sizes are "
     global SIZES
-    return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
-
+    for x in SIZES:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaSauces")
 def launch_ShowSaucesTypes_handler(request):
@@ -200,7 +208,7 @@ def get_pizza_crust_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read the crust choices, say show crust options"
+        reply = "I could not find it, if you want me to read the crust choices, say show pizza crusts"
         return alexa.create_response(message=reply)
 
 
@@ -266,8 +274,26 @@ def launch_number_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
+        reply = "I could not find it, please say it again"
         return alexa.create_response(message=reply)
+        
+@alexa.intent_handler("ChoosePizzaToppings")
+def get_toppings_handler(request):
+    topping = request.slots["topping"]
+
+    reply = 'you ordered ' + topping + '. '
+    global TOPPINGS
+    if topping in TOPPINGS:
+        reply = 'OK, order ' + topping + '. '
+        # save type into order
+        global ORDER
+        ORDER['topping'] = topping
+        reply += checkIsReady()
+        return alexa.create_response(message=reply)
+    else:
+        reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
+        return alexa.create_response(message=reply)
+        
 ''' Choosing '''
 
 
@@ -298,7 +324,7 @@ def checkIsReady():
         elif key is 'seasoning':
             return 'Please choose the seasoning for the pizza. '
         elif key is 'toppings':
-            return 'Do you want any topping?'
+            return 'Do you want any topping? '
 
 
 # check the information we want before writting to sheet
