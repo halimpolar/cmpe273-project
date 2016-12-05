@@ -285,6 +285,7 @@ def checkIsReady():
     isReady, key = hasEnoughInfo()
     if isReady:
         placeOrder()
+        initialzeOrder()
         return 'Order is ready, Thank you! '
     else:
         if key is 'name':
