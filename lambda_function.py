@@ -11,11 +11,15 @@ SAUCES = []
 TOPPINGS = []
 ORDER = {
     'name': None,
+    'no_of_pizza': 1,
     'type': None,
     'size': None,
-    'crust': None,
-    # 'toppings': None
-    'bake': None
+    'crust': 'handmade',
+    'sauce': 'barbeque',
+    'bake': 'well done',
+    'cut': 'square',
+    'seasoning': 'garlic seasoned crust',
+    'toppings': ['bacon', 'pineapple', 'none', 'none', 'none']
 }
 
 
@@ -106,6 +110,7 @@ def launch_AskName_handler(request):
     reply += checkIsReady()
     return alexa.create_response(message=reply)
 
+
 ''' Showing '''
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
@@ -145,6 +150,7 @@ def launch_ShowPizzaSizes_handler(request):
     global SIZES
     return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
 ''' Showing '''
+
 
 ''' Choosing '''
 @alexa.intent_handler('ChoosePizzaTypes')
@@ -224,18 +230,24 @@ def checkIsReady():
     else:
         if key is 'name':
             return 'Please tell me your name. '
+        if key is 'no_of_pizza':
+            return 'How many pizza do you want? '
         elif key is 'type':
             return 'Please choose a type of pizza. '
         elif key is 'size':
             return 'Please choose the size for the pizza. '
         elif key is 'crust':
             return 'Please choose the crust for the pizza. '
+        elif key is 'sauce':
+            return 'Please choose the sauce for the pizza. '
         elif key is 'bake':
             return 'How would you like your pizza to bake, well done or normal? '
-        '''
+        elif key is 'cut':
+            return 'Please choose the cut for the pizza. '
+        elif key is 'seasoning':
+            return 'Please choose the seasoning for the pizza. '
         elif key is 'toppings':
             return 'Do you want any topping?'
-        '''
 
 
 # check the information we want before writting to sheet
