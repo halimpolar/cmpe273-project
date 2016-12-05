@@ -371,8 +371,12 @@ def get_toppings_handler(request):
 
 @alexa.intent_handler("StopChoosingToppings")
 def launch_StopChoosingToppings_handler(request):
+    r = ''
     global ORDER
-    r = 'Ok, you already chose ' + str(len(ORDER['toppings'])) + ' toppings. '
+    if len(ORDER['toppings']) is 0:
+        r += "OK, you don't choose any topping. "
+    else:
+        r += 'Ok, you already chose ' + str(len(ORDER['toppings'])) + ' toppings. '
     count = 5 - len(ORDER['toppings'])
     for x in range(0, count):
         ORDER['toppings'].append('none')
