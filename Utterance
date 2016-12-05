@@ -26,3 +26,6 @@ ChoosePizzaSeasonings I want {seasoning} seasoning
 numberoforder I want {number} pizzas with same options
 
 StopChoosingToppings that's it
+
+OrderStatus what is status of my order {order}
+OrderStatus what is status of order {order}
