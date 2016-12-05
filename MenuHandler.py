@@ -65,7 +65,7 @@ class MenuHandler:
         return values
 
     def getPizzaSeasonings(self):
-        rangeName = self.sheetName + '!K2:K'
+        rangeName = self.sheetName + '!K3:K'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
