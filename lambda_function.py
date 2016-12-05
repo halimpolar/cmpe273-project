@@ -175,15 +175,6 @@ def launch_ShowCutsTypes_handler(request):
     return alexa.create_response(message=r)
 
 
-@alexa.intent_handler("ShowPizzaSeasonings")
-def launch_ShowSeasoningsTypes_handler(request):
-    r = "Seasonings are "
-    global SEASONINGS
-    for x in SEASONINGS:
-        r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
-
-
 @alexa.intent_handler("ShowPizzaBakes")
 def launch_ShowBakes_handler(request):
     r = "baked options are "
@@ -213,7 +204,7 @@ def launch_OrderStatus_handler(request):
             reply  = 'Your order is ready! Go grab it.' 
 	    
     else:
-        reply = 'Im sorry I dont have that order'	
+        reply = 'I am sorry I dont have that order'	
     return alexa.create_response(message=reply)
 ''' Showing '''
 
@@ -282,7 +273,7 @@ def launch_ChoosePizzaBake_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza bakes'"
+        reply = "I could not find it, if you want me to read the bake options, say 'show pizza bakes'"
         return alexa.create_response(message=reply)
 
 
@@ -299,7 +290,7 @@ def get_sauce_type_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza sauces'"
+        reply = "I could not find it, if you want me to read the sauce types, say 'show pizza sauces'"
         return alexa.create_response(message=reply)
 
 
@@ -317,7 +308,7 @@ def get_cut_type_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
+        reply = "I could not find it, if you want me to read the cut options, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 
 
@@ -373,22 +364,23 @@ def launch_StopChoosingToppings_handler(request):
     return alexa.create_response(message=r)
 
 
-@alexa.intent_handler("ChoosePizzaSeasonings")
+@alexa.intent_handler("AMAZON.YesIntent")
 def get_seasonings_handler(request):
-    seasoning = request.slots["seasoning"]
+    # seasoning = request.slots["seasoning"]
+    reply = 'you ordered garlic seasoned crust'
+    global ORDER
+    ORDER['seasoning'] = 'Garlic Seasoned Crust'
+    reply += checkIsReady()
+    return alexa.create_response(message=reply)
 
-    reply = 'you ordered ' + seasoning + '. '
-    global SEASONINGS
-    if seasoning in SEASONINGS:
-        reply = 'OK, order ' + seasoning + '. '
-        # save type into order
-        global ORDER
-        ORDER['seasoning'] = seasoning
-        reply += checkIsReady()
-        return alexa.create_response(message=reply)
-    else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
-        return alexa.create_response(message=reply)
+@alexa.intent_handler("AMAZON.NoIntent")
+def get_seasonings_handler(request):
+    # seasoning = request.slots["seasoning"]
+    reply = 'you do not want any seasoning'
+    global ORDER
+    ORDER['seasoning'] = 'none'
+    reply += checkIsReady()
+    return alexa.create_response(message=reply)
 ''' Choosing '''
 
 
@@ -441,7 +433,7 @@ def checkIsReady():
         elif key is 'cut':
             return 'Please choose the cut for the pizza. '
         elif key is 'seasoning':
-            return 'Please choose the seasoning for the pizza. '
+            return 'Do you want garlic seasoned crust for the seasoning? '
         elif key is 'toppings':
             return 'Do you want any topping? You can choose 5 toppings if you want. '
         elif key is 'more_toppings':
