@@ -14,3 +14,6 @@ name_type	          name
 pizza_type	        pizza  
 size_type	          size  
 bake_type           bake  
+sauce_type          robust inspired tomato | hearty marinara | barbeque | garlic parmesan white | alfredo  
+cut_type            cut  
+
