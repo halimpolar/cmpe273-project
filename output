@@ -14,10 +14,6 @@ ChoosePizzaTypes I want {pizza}
 ChoosePizzaSizes I want {size} pizza
 ChoosePizzaBakes I want pizza baked in {bake}
 ChoosePizzaCrusts I want {crust} crust
-ChoosePizzaToppings_one I want first topping is {topping_one}
-ChoosePizzaToppings_two I want second topping is {topping_two}
-ChoosePizzaToppings_three I want third  topping is {topping_three}
-ChoosePizzaToppings_four I want fourth  topping is {topping_four}
-ChoosePizzaToppings_five I want fifth topping is {topping_five}
+ChoosePizzaToppings_one I want first topping is {topping}
 
 WritingSheetTest test writing
