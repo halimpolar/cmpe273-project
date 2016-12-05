@@ -65,11 +65,11 @@ def lambda_handler(request_obj, context=None):
         # pizza sauces
         global SAUCES
         for s in menuHandler.getPizzaSauces():
-            SAUCES.append(s[0])
+            SAUCES.append(s[0].lower())
         # pizza cuts
         global CUTS
         for c in menuHandler.getPizzaCuts():
-            CUTS.append(c[0])
+            CUTS.append(c[0].lower())
         # pizza toppings
         global TOPPINGS
         for topping in menuHandler.getPizzaToppings():
