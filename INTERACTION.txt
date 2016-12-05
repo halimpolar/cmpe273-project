@@ -1,0 +1,39 @@
+NAME:
+my name is {name} / I'm {name} / I am {name} / it's {name} / it is {name}
+
+PIZZA:							
+I want {pizza} pizza
+------Extravaganzza / Meatzza / Philly Cheese Steak / Pacific Veggie / Honolulu Hawaiian / Deluxe /
+Cali Chicken Bacon Ranch / Buffalo Chicken / Ultimate Pepperoni / Memphis BBQ Chicken / Wisconsin 6 Challenge / Spinach and Feta
+
+SIZE:
+I want {size} size
+-------Small/ Medium / Large /Extra Large
+
+CRUST:
+I want {crust} crust
+------Hand Tossed  / Handmade / Crunchy Thin Crust / Brooklyn Style / Gluten Free
+
+SAUCE:
+I want {sauce} sauce
+------Robust Inspired Tomato / Hearty Marinara / Barbeque / Garlic Parmesan White / Alfredo
+
+BAKE:
+I want pizza baked in {bake}
+------Well Done / Normal
+
+CUT:
+I want {cut} cut
+------Pie / Square / Uncut
+
+SEASONING:
+I want {seasoning} seasoning
+-------None / Garlic Seasoned Crust
+
+TOPPINGS:
+I want to add more {topping}   / I want {topping} in the toppings
+
+--------Philly Steak / Bacon / Premium Chicken / Italian Sausage / Beef / Ham / Salami / Cheddar Cheese / 
+Shredded Parmesan Asiago / Banana Peppers / Garlic / Jalapeno Peppers / Pineapple / Roasted Red Peppers / 
+Tomatoes / Hot Sauce / Feta Cheese / Shredded Provolone Cheese / Black Olives / Green Peppers / Mushrooms / 
+Onions / Spinach / Diced Tomatoes
