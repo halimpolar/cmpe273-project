@@ -8,13 +8,19 @@ ShowPizzaTypes show pizza types
 ShowPizzaSizes show pizza sizes
 ShowPizzaCrusts show pizza crusts
 ShowPizzaSauces show pizza sauces
+ShowPizzaCuts show pizza cuts
 ShowPizzaToppings show pizza toppings
+ShowPizzaSeasonings show pizza seasonings
+ShowPizzaBakes show pizza bakes
 
 ChoosePizzaTypes I want {pizza}
 ChoosePizzaSizes I want {size} pizza
 ChoosePizzaBakes I want pizza baked in {bake}
 ChoosePizzaCrusts I want {crust} crust
+ChooseSauceTypes I want {sauce} sauce
+ChooseCutTypes I want {cut} cut
 ChoosePizzaToppings I want {topping} in the toppings
 ChoosePizzaToppings I want to add more {topping}
+ChoosePizzaSeasonings I want {seasoning} seasoning
 
 WritingSheetTest test writing
