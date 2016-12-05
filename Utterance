@@ -13,8 +13,8 @@ ShowPizzaToppings show pizza toppings
 ShowPizzaSeasonings show pizza seasonings
 ShowPizzaBakes show pizza bakes
 
-ChoosePizzaTypes I want {pizza}
-ChoosePizzaSizes I want {size} pizza
+ChoosePizzaTypes I want {pizza} pizza
+ChoosePizzaSizes I want {size} size
 ChoosePizzaBakes I want pizza baked in {bake}
 ChoosePizzaCrusts I want {crust} crust
 ChooseSauceTypes I want {sauce} sauce
@@ -22,5 +22,6 @@ ChooseCutTypes I want {cut} cut
 ChoosePizzaToppings I want {topping} in the toppings
 ChoosePizzaToppings I want to add more {topping}
 ChoosePizzaSeasonings I want {seasoning} seasoning
+NumberOfOrder I want {number} pizzas with same options
 
 WritingSheetTest test writing

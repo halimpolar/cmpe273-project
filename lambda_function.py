@@ -118,7 +118,7 @@ def launch_AskName_handler(request):
 ''' Showing '''
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
-    r = "pizza toppings are "
+    r = "pizza types are "
     global PIZZAS
     for x in PIZZAS:
         r = r + '{},'.format(x)
@@ -126,7 +126,7 @@ def launch_ShowPizzaTypes_handler(request):
 
 @alexa.intent_handler("ShowPizzaCrusts")
 def launch_ShowPizzaCrusts_handler(request):
-    r = "pizza toppings are "
+    r = "crusts type are "
     global CRUSTS
     for x in CRUSTS:
         r = r + '{},'.format(x)
@@ -175,7 +175,7 @@ def launch_ShowSeasoningsTypes_handler(request):
     
 @alexa.intent_handler("ShowPizzaBakes")
 def launch_ShowBakes_handler(request):
-    r = "bake options are "
+    r = "baked options are "
     global BAKES
     for x in BAKES:
         r = r + '{},'.format(x)
@@ -190,7 +190,7 @@ def get_pizza_type_handler(request):
     reply = 'you ordered ' + pizza + '. '
     global PIZZAS
     if pizza in PIZZAS:
-        reply = 'OK, order ' + pizza + '.'
+        reply = 'OK, order ' + pizza + '. '
         # save type into order
         global ORDER
         ORDER['type'] = pizza
@@ -267,11 +267,9 @@ def get_sauce_type_handler(request):
         reply = "I could not find it, if you want me to read menu, say 'show pizza sauces'"
         return alexa.create_response(message=reply)
 
-
 @alexa.intent_handler('ChooseCutTypes')
 def get_cut_type_handler(request):
     cut = request.slots["cut"]
-
     reply = 'you ordered ' + cut + '. '
     global CUTS
     if cut in CUTS:
@@ -285,8 +283,7 @@ def get_cut_type_handler(request):
         reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 
-
-@alexa.intent_handler("numberoforder")
+@alexa.intent_handler("NumberOfOrder")
 def launch_number_handler(request):
     global ORDER
     num = request.slots["num"]
