@@ -16,6 +16,9 @@
       "intent": "ShowPizzaSauces"
     },
     {
+      "intent": "ShowPizzaCuts"
+    },
+    {
       "intent": "ShowPizzaToppings"
     }, 
     {
@@ -56,6 +59,34 @@
         }
       ]
     },
+	{
+      "intent": "numberoforder", 
+      "slots": [
+        {
+          "name": "num", 
+          "type": "AMAZON.NUMBER"
+        }]
+    },
+	{
+      "intent": "ChooseSauceTypes", 
+      "slots": 
+      [
+        {
+          "name": "sauce", 
+          "type": "sauce_type"
+        }
+      ]
+    },
+    {
+      "intent": "ChooseCutTypes", 
+      "slots": 
+      [
+        {
+          "name": "cut", 
+          "type": "cut_type"
+        }
+      ]
+    },
     {
       "intent": "ChoosePizzaBakes", 
       "slots": 
@@ -63,56 +94,6 @@
         {
           "name": "bake", 
           "type": "bake_type"
-        }
-      ]
-    },
-    {
-      "intent": "ChoosePizzaToppings_one", 
-      "slots": 
-      [
-        {
-          "name": "topping_one", 
-          "type": "topping_type"
-        }
-      ]
-    },
-    {
-      "intent": "ChoosePizzaToppings_two", 
-      "slots": 
-      [
-        {
-          "name": "topping_two", 
-          "type": "topping_type"
-        }
-      ]
-    },
-    {
-      "intent": "ChoosePizzaToppings_three", 
-      "slots": 
-      [
-        {
-          "name": "topping_three", 
-          "type": "topping_type"
-        }
-      ]
-    },
-    {
-      "intent": "ChoosePizzaToppings_four", 
-      "slots": 
-      [
-        {
-          "name": "topping_four", 
-          "type": "topping_type"
-        }
-      ]
-    },
-    {
-      "intent": "ChoosePizzaToppings_five", 
-      "slots": 
-      [
-        {
-          "name": "topping_five", 
-          "type": "topping_type"
         }
       ]
     }

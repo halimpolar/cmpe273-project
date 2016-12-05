@@ -9,6 +9,7 @@ SIZES = []
 CRUSTS = []
 BAKES = []
 SAUCES = []
+CUTS = []
 TOPPINGS = []
 ORDER = OrderedDict()
 ORDER['name'] = None
@@ -63,8 +64,12 @@ def lambda_handler(request_obj, context=None):
             BAKES.append(bake[0].lower())
         # pizza sauces
         global SAUCES
-        for sauce in menuHandler.getPizzaSauces():
-            SAUCES.append(sauce[0].lower())
+        for s in menuHandler.getPizzaSauces():
+            SAUCES.append(s[0])
+        # pizza cuts
+        global CUTS
+        for c in menuHandler.getPizzaCuts():
+            CUTS.append(c[0])
         # pizza toppings
         global TOPPINGS
         for topping in menuHandler.getPizzaToppings():
@@ -89,14 +94,6 @@ def launch_request_handler(request):
 @alexa.request_handler("SessionEndedRequest")
 def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
-
-
-@alexa.intent_handler("WritingSheetTest")
-def launch_WritingSheet_handler(request):
-    orderHandler = OrderHandler()
-    global ORDER
-    orderHandler.placeOrder(ORDER)
-    return alexa.create_response(message="testing writing to sheet")
 
 
 @alexa.intent_handler("AskName")
@@ -134,22 +131,34 @@ def launch_ShowPizzaCrusts_handler(request):
     return alexa.create_response(message="pizza crusts: {}, {}".format(CRUSTS[0], CRUSTS[1]))
 
 
-@alexa.intent_handler("ShowPizzaSauces")
-def launch_ShowPizzaSauces_handler(request):
-    global SAUCES
-    return alexa.create_response(message="pizza sauces: {}, {}".format(SAUCES[0], SAUCES[1]))
-
-
 @alexa.intent_handler("ShowPizzaToppings")
 def launch_ShowPizzaToppings_handler(request):
     global TOPPINGS
-    return alexa.create_response(message="Pick up to 5 pizza toppings: {}, {}, {}, {}, {}".format(TOPPINGS[0], TOPPINGS[1], TOPPINGS[2], TOPPINGS[3], TOPPINGS[4]))
+    return alexa.create_response(message="pizza toppings: {}, {}".format(TOPPINGS[0], TOPPINGS[1]))
 
 
 @alexa.intent_handler("ShowPizzaSizes")
 def launch_ShowPizzaSizes_handler(request):
     global SIZES
     return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
+
+
+@alexa.intent_handler("ShowPizzaSauces")
+def launch_ShowSaucesTypes_handler(request):
+    r = "sauces types are "
+    global SAUCES
+    for x in SAUCES:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)
+
+
+@alexa.intent_handler("ShowPizzaCuts")
+def launch_ShowCutsTypes_handler(request):
+    r = "cuts types are "
+    global CUTS
+    for x in CUTS:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)
 ''' Showing '''
 
 
@@ -167,7 +176,7 @@ def get_pizza_type_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say show pizza types"
+        reply = "I could not find it, if you want me to read menu, say 'show pizza types'"
         return alexa.create_response(message=reply)
 
 
@@ -183,7 +192,7 @@ def get_pizza_size_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not get it, if you want me to read the pizza size, say show pizza sizes"
+        reply = "I could not get it, if you want me to read the pizza size, say 'show pizza sizes'"
         return alexa.create_response(message=reply)
 
 
@@ -217,118 +226,56 @@ def launch_ChoosePizzaBake_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say show pizza bakes"
+        reply = "I could not find it, if you want me to read menu, say 'show pizza bakes'"
         return alexa.create_response(message=reply)
 
 
-@alexa.intent_handler('ChoosePizzaToppings1')
-def launch_ChoosePizzaToppings_handler(request):
-    topping = request.slots["topping1"]
-    reply = "you want your first topping is " + topping + ". "
-    global TOPPINGS
-    if topping in TOPPINGS:
-        reply = "Ok, " + topping + " topping is added. "
-        # save bake into order
+@alexa.intent_handler('ChooseSauceTypes')
+def get_sauce_type_handler(request):
+    sauce = request.slots["sauce"]
+    reply = 'you ordered ' + sauce + '. '
+    global SAUCES
+    if sauce in SAUCES:
+        reply = 'OK, order ' + sauce + '. '
+        # save type into order
         global ORDER
-        ORDER['topping1'] = topping
+        ORDER['sauce'] = sauce
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say show pizza toppings"
+        reply = "I could not find it, if you want me to read menu, say 'show pizza sauces'"
         return alexa.create_response(message=reply)
 
 
-@alexa.intent_handler('ChoosePizzaToppings2')
-def launch_ChoosePizzaToppings_handler(request):
-    topping = request.slots["topping2"]
-    if (topping == "no more" or topping == "none"):
-        ORDER['topping2'] = "none"
-        ORDER['topping3'] = "none"
-        ORDER['topping4'] = "none"
-        ORDER['topping5'] = "none"
-        reply = "okay, no more toppings added."
-        return alexa.create_response(message=reply)
-    else:
-        reply = "you want your second topping is " + topping + ". "
-    global TOPPINGS
-    if topping in TOPPINGS:
-        reply = "Ok, " + topping + " topping is added. "
-        # save bake into order
+@alexa.intent_handler('ChooseCutTypes')
+def get_cut_type_handler(request):
+    cut = request.slots["cut"]
+
+    reply = 'you ordered ' + cut + '. '
+    global CUTS
+    if cut in CUTS:
+        reply = 'OK, order ' + cut + '. '
+        # save type into order
         global ORDER
-        ORDER['topping2'] = topping
+        ORDER['cut'] = cut
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say show pizza toppings"
+        reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 
 
-@alexa.intent_handler('ChoosePizzaToppings3')
-def launch_ChoosePizzaToppings_handler(request):
-    topping = request.slots["topping3"]
-    if (topping == "no more" or topping == "none"):
-        ORDER['topping3'] = "none"
-        ORDER['topping4'] = "none"
-        ORDER['topping5'] = "none"
-        reply = "okay, no more toppings added."
-        return alexa.create_response(message=reply)
-    else:
-        reply = "you want your third topping is " + topping + ". "
-    global TOPPINGS
-    if topping in TOPPINGS:
-        reply = "Ok, " + topping + " topping is added. "
-        # save bake into order
-        global ORDER
-        ORDER['topping3'] = topping
+@alexa.intent_handler("numberoforder")
+def launch_number_handler(request):
+    global ORDER
+    num = request.slots["num"]
+    if num >= 1:
+        reply = "ordering {} pizzas".format(num)
+        ORDER['no_of_pizza'] = num
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say show pizza toppings"
-        return alexa.create_response(message=reply)
-
-
-@alexa.intent_handler('ChoosePizzaToppings4')
-def launch_ChoosePizzaToppings_handler(request):
-    topping = request.slots["topping4"]
-    if (topping == "no more" or topping == "none"):
-        ORDER['topping4'] = "none"
-        ORDER['topping5'] = "none"
-        reply = "okay, no more toppings added."
-        return alexa.create_response(message=reply)
-    else:
-        reply = "you want your fourth topping is " + topping + ". "
-    global TOPPINGS
-    if topping in TOPPINGS:
-        reply = "Ok, " + topping + " topping is added. "
-        # save bake into order
-        global ORDER
-        ORDER['topping4'] = topping
-        reply += checkIsReady()
-        return alexa.create_response(message=reply)
-    else:
-        reply = "I could not find it, if you want me to read menu, say show pizza toppings"
-        return alexa.create_response(message=reply)
-
-
-@alexa.intent_handler('ChoosePizzaToppings5')
-def launch_ChoosePizzaToppings_handler(request):
-    topping = request.slots["topping5"]
-    if (topping == "no more" or topping == "none"):
-        ORDER['topping5'] = "none"
-        reply = "okay, no more toppings added."
-        return alexa.create_response(message=reply)
-    else:
-        reply = "you want your fifth topping is " + topping + ". "
-    global TOPPINGS
-    if topping in TOPPINGS:
-        reply = "Ok, " + topping + " topping is added. "
-        # save bake into order
-        global ORDER
-        ORDER['topping5'] = topping
-        reply += checkIsReady()
-        return alexa.create_response(message=reply)
-    else:
-        reply = "I could not find it, if you want me to read menu, say show pizza toppings"
+        reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 ''' Choosing '''
 
@@ -360,18 +307,6 @@ def checkIsReady():
             return 'Please choose the seasoning for the pizza. '
         elif key is 'toppings':
             return 'Do you want any topping?'
-        '''
-        elif key is 'topping1':
-            return 'You can pick up to 5 toppings, what is your first one?'
-        elif key is 'topping2':
-            return 'what is your second topping?'
-        elif key is 'topping3':
-            return 'what is your third topping?'
-        elif key is 'topping4':
-            return 'what is your fourth topping?'
-        elif key is 'topping5':
-            return 'what is your fifth topping?'
-        '''
 
 
 # check the information we want before writting to sheet
