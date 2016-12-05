@@ -13,7 +13,6 @@ CUTS = []
 TOPPINGS = []
 ORDER = OrderedDict()
 ORDER['name'] = None
-ORDER['no_of_pizza'] = 1
 ORDER['type'] = None
 ORDER['size'] = None
 ORDER['crust'] = 'handmade'
@@ -22,6 +21,7 @@ ORDER['bake'] = 'well done'
 ORDER['cut'] = 'pie'
 ORDER['seasoning'] = 'garlic seasoned crust'
 ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
+ORDER['no_of_pizza'] = None
 
 
 def lambda_handler(request_obj, context=None):
@@ -165,7 +165,7 @@ def launch_ShowCutsTypes_handler(request):
 ''' Choosing '''
 @alexa.intent_handler('ChoosePizzaTypes')
 def get_pizza_type_handler(request):
-    pizza = request.slots["pizza"]
+    pizza = request.slots["pizza"].lower()
     reply = 'you ordered ' + pizza + '. '
     global PIZZAS
     if pizza in PIZZAS:
@@ -323,3 +323,18 @@ def placeOrder():
     orderHandler = OrderHandler()
     global ORDER
     orderHandler.placeOrder(ORDER)
+
+
+# after ordering
+def initialzeOrder():
+    ORDER = OrderedDict()
+    ORDER['name'] = None
+    ORDER['type'] = None
+    ORDER['size'] = None
+    ORDER['crust'] = 'handmade'
+    ORDER['sauce'] = 'barbeque'
+    ORDER['bake'] = 'well done'
+    ORDER['cut'] = 'pie'
+    ORDER['seasoning'] = 'garlic seasoned crust'
+    ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
+    ORDER['no_of_pizza'] = None
