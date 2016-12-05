@@ -89,7 +89,7 @@ class OrderHandler:
                 # pizza topping-5 price
                 '=vlookup(Z' + new_row_num + ',ActualMenu!$M$2:$N,2,false)',
                 # total
-                '=E'+str(new_row_num)+'+G'+str(new_row_num)+'+I'+str(new_row_num)+'+K'+str(new_row_num)+'+M'+str(new_row_num)+'+O'+str(new_row_num)+'+Q'+str(new_row_num)+'+S'+str(new_row_num)+'+U'+str(new_row_num)+'+W'+str(new_row_num)+'+Y'+str(new_row_num)+'+AA'+str(new_row_num),
+                '=C'+new_row_num+'*(E'+str(new_row_num)+'+G'+str(new_row_num)+'+I'+str(new_row_num)+'+K'+str(new_row_num)+'+M'+str(new_row_num)+'+O'+str(new_row_num)+'+Q'+str(new_row_num)+'+S'+str(new_row_num)+'+U'+str(new_row_num)+'+W'+str(new_row_num)+'+Y'+str(new_row_num)+'+AA'+str(new_row_num)+')',
                 # timestamp
                 time.time()
             ]
