@@ -10,6 +10,7 @@ CRUSTS = []
 BAKES = []
 SAUCES = []
 CUTS = []
+SEASONINGS = []
 TOPPINGS = []
 ORDER = OrderedDict()
 ORDER['name'] = None
@@ -19,7 +20,7 @@ ORDER['crust'] = None
 ORDER['sauce'] = None
 ORDER['bake'] = None
 ORDER['cut'] = None
-ORDER['seasoning'] = 'garlic seasoned crust'
+ORDER['seasoning'] = None
 ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
 ORDER['no_of_pizza'] = None
 
@@ -392,6 +393,6 @@ def initialzeOrder():
     ORDER['sauce'] = None
     ORDER['bake'] = None
     ORDER['cut'] = None
-    ORDER['seasoning'] = 'garlic seasoned crust'
+    ORDER['seasoning'] = None
     ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
     ORDER['no_of_pizza'] = None
