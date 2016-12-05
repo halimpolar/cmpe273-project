@@ -37,7 +37,7 @@ class MenuHandler:
         return values
 
     def getPizzaToppings(self):
-        rangeName = self.sheetName + '!M2:M'
+        rangeName = self.sheetName + '!M3:M'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
@@ -56,7 +56,7 @@ class MenuHandler:
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return values
-		
+
     def getPizzaSauces(self):
         rangeName = self.sheetName + '!E2:E'
         result = self.service.spreadsheets().values().get(
