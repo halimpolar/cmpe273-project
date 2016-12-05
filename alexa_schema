@@ -1,9 +1,6 @@
 {
   "intents": [
     {
-      "intent": "WritingSheetTest"
-    }, 
-    {
       "intent": "ShowPizzaTypes"
     }, 
     {
