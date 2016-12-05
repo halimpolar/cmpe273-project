@@ -272,8 +272,9 @@ def launch_number_handler(request):
     if num >= 1:
         reply = "ordering {} pizzas".format(num)
         ORDER['no_of_pizza'] = num
-        reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        # reply += checkIsReady()
+        return checkIsReady()
+        # return alexa.create_response(message=reply)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
@@ -285,11 +286,32 @@ def checkIsReady():
     isReady, key = hasEnoughInfo()
     if isReady:
         order_no, total_price = placeOrder()
-        initialzeOrder()
         reply = 'Thank you! Your order number is ' + order_no + '. '
-        reply += 'And the total will be ' + total_price + '. '
+        reply += 'And the total will be $' + total_price + '. '
         reply += 'Your pizza will be ready in 15 minutes. '
-        return reply
+        # return complete info to user for the order
+        global ORDER
+        content = 'Order Number: ' + order_no + '\n'
+        content += 'Customer Name: ' + ORDER['name'] + '\n'
+        content += 'Pizza Type: ' + ORDER['type'] + '\n'
+        content += 'Pizza Size: ' + ORDER['size'] + '\n'
+        content += 'Pizza Crust: ' + ORDER['crust'] + '\n'
+        content += 'Pizza Sauce: ' + ORDER['sauce'] + '\n'
+        content += 'Pizza Bake: ' + ORDER['bake'] + '\n'
+        content += 'Pizza Cut: ' + ORDER['cut'] + '\n'
+        content += 'Pizza Seasoning: ' + ORDER['seasoning'] + '\n'
+        content += 'Pizza Toppings: '
+        count = 1
+        for topping in ORDER['toppings']:
+            if topping is not 'none':
+                content += str(count) + '. ' + topping + ' '
+                count += 1
+        content += '\n'
+        content += 'Number of Pizza: ' + ORDER['no_of_pizza'] + '\n'
+        content += 'Total Price: $' + total_price + '\n'
+        card = alexa.create_card(title="Pizza Order Detail", subtitle=None, content=content)
+        initialzeOrder()
+        return alexa.create_response(message=reply, end_session=False, card_obj=card)
     else:
         if key is 'name':
             return 'Please tell me your name. '
