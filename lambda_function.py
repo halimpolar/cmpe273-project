@@ -328,6 +328,7 @@ def placeOrder():
 
 # after ordering
 def initialzeOrder():
+    global ORDER
     ORDER = OrderedDict()
     ORDER['name'] = None
     ORDER['type'] = None
