@@ -94,7 +94,7 @@ def default_handler(request):
 
 @alexa.request_handler("LaunchRequest")
 def launch_request_handler(request):
-    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System")
+    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System. Can I have your name, please?")
 
 
 @alexa.request_handler("SessionEndedRequest")
@@ -187,10 +187,10 @@ def launch_ShowBakes_handler(request):
 @alexa.intent_handler('ChoosePizzaTypes')
 def get_pizza_type_handler(request):
     pizza = request.slots["pizza"].lower()
-    reply = 'you ordered ' + pizza + '. '
+    reply = 'you ordered ' + pizza
     global PIZZAS
     if pizza in PIZZAS:
-        reply = 'OK, order ' + pizza + '.'
+        reply = 'OK, order ' + pizza
         # save type into order
         global ORDER
         ORDER['type'] = pizza
