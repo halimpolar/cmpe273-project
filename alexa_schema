@@ -32,7 +32,7 @@
       "slots": [
         {
           "name": "name", 
-          "type": “AMAZON.LITERAL”
+          "type": "AMAZON.LITERAL"
         }]
     },
 	{
