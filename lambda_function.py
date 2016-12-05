@@ -10,16 +10,17 @@ CRUSTS = []
 BAKES = []
 SAUCES = []
 CUTS = []
+SEASONINGS = []
 TOPPINGS = []
 ORDER = OrderedDict()
 ORDER['name'] = None
 ORDER['type'] = None
 ORDER['size'] = None
-ORDER['crust'] = 'handmade'
-ORDER['sauce'] = 'barbeque'
-ORDER['bake'] = 'well done'
-ORDER['cut'] = 'pie'
-ORDER['seasoning'] = 'garlic seasoned crust'
+ORDER['crust'] = None
+ORDER['sauce'] = None
+ORDER['bake'] = None
+ORDER['cut'] = None
+ORDER['seasoning'] = None
 ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
 ORDER['no_of_pizza'] = None
 
@@ -74,6 +75,11 @@ def lambda_handler(request_obj, context=None):
         global TOPPINGS
         for topping in menuHandler.getPizzaToppings():
             TOPPINGS.append(topping[0].lower())
+        # pizza seasonings
+        global SEASONINGS
+        for topping in menuHandler.getPizzaSeasonings():
+            SEASONINGS.append(topping[0].lower())
+
         # set flag to true
         HasLoaded = True
 
@@ -88,7 +94,7 @@ def default_handler(request):
 
 @alexa.request_handler("LaunchRequest")
 def launch_request_handler(request):
-    return alexa.create_response(message="Hello Welcome to the Pizza Ordering System")
+    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System. Can I have your name, please?")
 
 
 @alexa.request_handler("SessionEndedRequest")
@@ -101,7 +107,7 @@ def launch_AskName_handler(request):
     # global menuHandler
     name = request.slots["name"]
 
-    reply = "ordering pizza with name {}".format(name)
+    reply = "Hi {}. ".format(name)
     # write name into Order
     global ORDER
     ORDER['name'] = name
@@ -112,13 +118,12 @@ def launch_AskName_handler(request):
 ''' Showing '''
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
+    r = "pizza types are "
     global PIZZAS
-    content = ''
-    for pizza in PIZZAS:
-        content += pizza + ' '
-    card = alexa.create_card(title="Pizza Types", subtitle=None, content=content)
-    return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]),
-                                 end_session=False, card_obj=card)
+    for x in PIZZAS:
+        r = r + '{},'.format(x)
+    card = alexa.create_card(title="Pizza Menu", subtitle=None, content=r)
+    return alexa.create_response(message=r, end_session=False, card_obj=card)
     '''
     global PIZZAS
     return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
@@ -127,28 +132,34 @@ def launch_ShowPizzaTypes_handler(request):
 
 @alexa.intent_handler("ShowPizzaCrusts")
 def launch_ShowPizzaCrusts_handler(request):
+    r = "crusts type are "
     global CRUSTS
-    return alexa.create_response(message="pizza crusts: {}, {}".format(CRUSTS[0], CRUSTS[1]))
-
+    for x in CRUSTS:
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaToppings")
 def launch_ShowPizzaToppings_handler(request):
+    r = "pizza toppings are "
     global TOPPINGS
-    return alexa.create_response(message="pizza toppings: {}, {}".format(TOPPINGS[0], TOPPINGS[1]))
-
+    for x in TOPPINGS:
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaSizes")
 def launch_ShowPizzaSizes_handler(request):
+    r = "pizza sizes are "
     global SIZES
-    return alexa.create_response(message="pizza sizes: {}, {}".format(SIZES[0], SIZES[1]))
-
+    for x in SIZES:
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaSauces")
 def launch_ShowSaucesTypes_handler(request):
     r = "sauces types are "
     global SAUCES
     for x in SAUCES:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
 
@@ -157,7 +168,23 @@ def launch_ShowCutsTypes_handler(request):
     r = "cuts types are "
     global CUTS
     for x in CUTS:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)
+
+@alexa.intent_handler("ShowPizzaSeasonings")
+def launch_ShowSeasoningsTypes_handler(request):
+    r = "Seasonings are "
+    global SEASONINGS
+    for x in SEASONINGS:
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)
+
+@alexa.intent_handler("ShowPizzaBakes")
+def launch_ShowBakes_handler(request):
+    r = "baked options are "
+    global BAKES
+    for x in BAKES:
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 ''' Showing '''
 
@@ -166,10 +193,10 @@ def launch_ShowCutsTypes_handler(request):
 @alexa.intent_handler('ChoosePizzaTypes')
 def get_pizza_type_handler(request):
     pizza = request.slots["pizza"].lower()
-    reply = 'you ordered ' + pizza + '. '
+    reply = 'you ordered ' + pizza
     global PIZZAS
     if pizza in PIZZAS:
-        reply = 'OK, order ' + pizza + '.'
+        reply = 'OK, order ' + pizza
         # save type into order
         global ORDER
         ORDER['type'] = pizza
@@ -209,7 +236,7 @@ def get_pizza_crust_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read the crust choices, say show crust options"
+        reply = "I could not find it, if you want me to read the crust choices, say 'show pizza crusts'"
         return alexa.create_response(message=reply)
 
 
@@ -264,7 +291,6 @@ def get_cut_type_handler(request):
         reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 
-
 @alexa.intent_handler("numberoforder")
 def launch_number_handler(request):
     global ORDER
@@ -276,8 +302,44 @@ def launch_number_handler(request):
         return checkIsReady()
         # return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
+        reply = "I could not understand it, please say the number of pizza you want"
         return alexa.create_response(message=reply)
+
+
+@alexa.intent_handler("ChoosePizzaToppings")
+def get_toppings_handler(request):
+    topping = request.slots["topping"]
+
+    reply = 'you ordered ' + topping + '. '
+    global TOPPINGS
+    if topping in TOPPINGS:
+        reply = 'OK, order ' + topping + '. '
+        # save type into order
+        global ORDER
+        ORDER['topping'] = topping
+        reply += checkIsReady()
+        return alexa.create_response(message=reply)
+    else:
+        reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
+        return alexa.create_response(message=reply)
+
+@alexa.intent_handler("ChoosePizzaSeasonings")
+def get_seasonings_handler(request):
+    seasoning = request.slots["seasoning"]
+
+    reply = 'you ordered ' + seasoning + '. '
+    global SEASONINGS
+    if seasoning in SEASONINGS:
+        reply = 'OK, order ' + seasoning + '. '
+        # save type into order
+        global ORDER
+        ORDER['seasoning'] = seasoning
+        reply += checkIsReady()
+        return alexa.create_response(message=reply)
+    else:
+        reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
+        return alexa.create_response(message=reply)
+
 ''' Choosing '''
 
 
@@ -332,7 +394,7 @@ def checkIsReady():
         elif key is 'seasoning':
             return 'Please choose the seasoning for the pizza. '
         elif key is 'toppings':
-            return 'Do you want any topping?'
+            return 'Do you want any topping? '
 
 
 # check the information we want before writting to sheet
@@ -358,10 +420,10 @@ def initialzeOrder():
     ORDER['name'] = None
     ORDER['type'] = None
     ORDER['size'] = None
-    ORDER['crust'] = 'handmade'
-    ORDER['sauce'] = 'barbeque'
-    ORDER['bake'] = 'well done'
-    ORDER['cut'] = 'pie'
-    ORDER['seasoning'] = 'garlic seasoned crust'
+    ORDER['crust'] = None
+    ORDER['sauce'] = None
+    ORDER['bake'] = None
+    ORDER['cut'] = None
+    ORDER['seasoning'] = None
     ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
     ORDER['no_of_pizza'] = None

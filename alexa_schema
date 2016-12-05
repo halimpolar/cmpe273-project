@@ -1,9 +1,6 @@
 {
   "intents": [
     {
-      "intent": "WritingSheetTest"
-    }, 
-    {
       "intent": "ShowPizzaTypes"
     }, 
     {
@@ -21,6 +18,12 @@
     {
       "intent": "ShowPizzaToppings"
     }, 
+    {
+      "intent": "ShowPizzaSeasonings"
+    },
+    {
+      "intent": "ShowPizzaBakes"
+    },
     {
       "intent": "AskName", 
       "slots": [
@@ -94,6 +97,26 @@
         {
           "name": "bake", 
           "type": "bake_type"
+        }
+      ]
+    },
+    {
+      "intent": "ChoosePizzaSeasonings", 
+      "slots": 
+      [
+        {
+          "name": "seasoning", 
+          "type": "seasoning_type"
+        }
+      ]
+    },
+    {
+      "intent": "ChoosePizzaToppings", 
+      "slots": 
+      [
+        {
+          "name": "topping", 
+          "type": "topping_type"
         }
       ]
     }
