@@ -11,17 +11,16 @@ BAKES = []
 SAUCES = []
 CUTS = []
 TOPPINGS = []
-SEASONINGS = []
 ORDER = OrderedDict()
 ORDER['name'] = None
 ORDER['type'] = None
 ORDER['size'] = None
-ORDER['crust'] = 'handmade'
-ORDER['sauce'] = 'barbeque'
-ORDER['bake'] = 'well done'
-ORDER['cut'] = 'pie'
+ORDER['crust'] = None
+ORDER['sauce'] = None
+ORDER['bake'] = None
+ORDER['cut'] = None
 ORDER['seasoning'] = 'garlic seasoned crust'
-ORDER['toppings'] = ['bacon', 'none', 'none', 'none', 'none']
+ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
 ORDER['no_of_pizza'] = None
 
 
@@ -190,7 +189,7 @@ def get_pizza_type_handler(request):
     reply = 'you ordered ' + pizza + '. '
     global PIZZAS
     if pizza in PIZZAS:
-        reply = 'OK, order ' + pizza + '. '
+        reply = 'OK, order ' + pizza + '.'
         # save type into order
         global ORDER
         ORDER['type'] = pizza
@@ -216,7 +215,7 @@ def get_pizza_size_handler(request):
         reply = "I could not get it, if you want me to read the pizza size, say 'show pizza sizes'"
         return alexa.create_response(message=reply)
 
-
+    
 @alexa.intent_handler('ChoosePizzaCrusts')
 def get_pizza_crust_handler(request):
     crust = request.slots["crust"]
@@ -230,7 +229,7 @@ def get_pizza_crust_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, if you want me to read the crust choices, say show pizza crusts"
+        reply = "I could not find it, if you want me to read the crust choices, say 'show pizza crusts'"
         return alexa.create_response(message=reply)
 
 
@@ -267,9 +266,11 @@ def get_sauce_type_handler(request):
         reply = "I could not find it, if you want me to read menu, say 'show pizza sauces'"
         return alexa.create_response(message=reply)
 
+
 @alexa.intent_handler('ChooseCutTypes')
 def get_cut_type_handler(request):
     cut = request.slots["cut"]
+    
     reply = 'you ordered ' + cut + '. '
     global CUTS
     if cut in CUTS:
@@ -283,7 +284,7 @@ def get_cut_type_handler(request):
         reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 
-@alexa.intent_handler("NumberOfOrder")
+@alexa.intent_handler("numberoforder")
 def launch_number_handler(request):
     global ORDER
     num = request.slots["num"]
@@ -293,8 +294,9 @@ def launch_number_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
-        reply = "I could not find it, please say it again"
+        reply = "I could not understand it, please say the number of pizza you want"
         return alexa.create_response(message=reply)
+        
         
 @alexa.intent_handler("ChoosePizzaToppings")
 def get_toppings_handler(request):
@@ -381,14 +383,15 @@ def placeOrder():
 
 # after ordering
 def initialzeOrder():
+    global ORDER
     ORDER = OrderedDict()
     ORDER['name'] = None
     ORDER['type'] = None
     ORDER['size'] = None
-    ORDER['crust'] = 'handmade'
-    ORDER['sauce'] = 'barbeque'
-    ORDER['bake'] = 'well done'
-    ORDER['cut'] = 'pie'
+    ORDER['crust'] = None
+    ORDER['sauce'] = None
+    ORDER['bake'] = None
+    ORDER['cut'] = None
     ORDER['seasoning'] = 'garlic seasoned crust'
     ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
     ORDER['no_of_pizza'] = None
