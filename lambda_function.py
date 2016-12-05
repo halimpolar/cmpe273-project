@@ -21,7 +21,7 @@ ORDER['sauce'] = None
 ORDER['bake'] = None
 ORDER['cut'] = None
 ORDER['seasoning'] = None
-ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
+ORDER['toppings'] = None
 ORDER['no_of_pizza'] = None
 
 
@@ -138,6 +138,7 @@ def launch_ShowPizzaCrusts_handler(request):
         r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
+
 @alexa.intent_handler("ShowPizzaToppings")
 def launch_ShowPizzaToppings_handler(request):
     r = "pizza toppings are "
@@ -146,6 +147,7 @@ def launch_ShowPizzaToppings_handler(request):
         r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
+
 @alexa.intent_handler("ShowPizzaSizes")
 def launch_ShowPizzaSizes_handler(request):
     r = "pizza sizes are "
@@ -153,6 +155,7 @@ def launch_ShowPizzaSizes_handler(request):
     for x in SIZES:
         r = r + '{},'.format(x)
     return alexa.create_response(message=r)
+
 
 @alexa.intent_handler("ShowPizzaSauces")
 def launch_ShowSaucesTypes_handler(request):
@@ -171,6 +174,7 @@ def launch_ShowCutsTypes_handler(request):
         r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
+
 @alexa.intent_handler("ShowPizzaSeasonings")
 def launch_ShowSeasoningsTypes_handler(request):
     r = "Seasonings are "
@@ -178,6 +182,7 @@ def launch_ShowSeasoningsTypes_handler(request):
     for x in SEASONINGS:
         r = r + '{},'.format(x)
     return alexa.create_response(message=r)
+
 
 @alexa.intent_handler("ShowPizzaBakes")
 def launch_ShowBakes_handler(request):
@@ -291,6 +296,7 @@ def get_cut_type_handler(request):
         reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
         return alexa.create_response(message=reply)
 
+
 @alexa.intent_handler("numberoforder")
 def launch_number_handler(request):
     global ORDER
@@ -308,20 +314,40 @@ def launch_number_handler(request):
 
 @alexa.intent_handler("ChoosePizzaToppings")
 def get_toppings_handler(request):
-    topping = request.slots["topping"]
+    input_topping = request.slots["topping"]
 
-    reply = 'you ordered ' + topping + '. '
+    reply = 'you ordered ' + input_topping + '. '
     global TOPPINGS
-    if topping in TOPPINGS:
-        reply = 'OK, order ' + topping + '. '
+    if input_topping in TOPPINGS:
+        reply = 'OK, order ' + input_topping + '. '
         # save type into order
         global ORDER
-        ORDER['topping'] = topping
+        if ORDER['toppings'] is None:
+            ORDER['toppings'] = []
+        ORDER['toppings'].append(input_topping)
+        '''
+        if len(ORDER['toppings']) < 5:
+            ORDER['toppings'].append(input_topping)
+        else:
+            return alexa.create_response(message='Sorry, you can only choose 5 toppings! ')
+        '''
         reply += checkIsReady()
         return alexa.create_response(message=reply)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
         return alexa.create_response(message=reply)
+
+
+@alexa.intent_handler("StopChoosingToppings")
+def launch_StopChoosingToppings_handler(request):
+    global ORDER
+    r = 'Ok, you already chose ' + str(len(ORDER['toppings'])) + ' toppings. '
+    count = 5 - len(ORDER['toppings'])
+    for x in range(0, count):
+        ORDER['toppings'].append('none')
+    r += checkIsReady()
+    return alexa.create_response(message=r)
+
 
 @alexa.intent_handler("ChoosePizzaSeasonings")
 def get_seasonings_handler(request):
@@ -339,7 +365,6 @@ def get_seasonings_handler(request):
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
         return alexa.create_response(message=reply)
-
 ''' Choosing '''
 
 
@@ -377,7 +402,7 @@ def checkIsReady():
     else:
         if key is 'name':
             return 'Please tell me your name. '
-        if key is 'no_of_pizza':
+        elif key is 'no_of_pizza':
             return 'How many pizza do you want? '
         elif key is 'type':
             return 'Please choose a type of pizza. '
@@ -394,15 +419,25 @@ def checkIsReady():
         elif key is 'seasoning':
             return 'Please choose the seasoning for the pizza. '
         elif key is 'toppings':
-            return 'Do you want any topping? '
+            return 'Do you want any topping? You can choose 5 toppings if you want. '
+        elif key is 'more_toppings':
+            return 'Any other toppings? '
 
 
 # check the information we want before writting to sheet
 def hasEnoughInfo():
     global ORDER
     for key in ORDER.keys():
-        if ORDER[key] is None:
-            return False, key
+        if key is 'toppings':
+            if ORDER[key] is None:
+                return False, key
+            else:
+                if len(ORDER[key]) < 5:
+                    return False, 'more_toppings'
+        else:
+            if ORDER[key] is None:
+                return False, key
+
     return True, None
 
 
@@ -425,5 +460,5 @@ def initialzeOrder():
     ORDER['bake'] = None
     ORDER['cut'] = None
     ORDER['seasoning'] = None
-    ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
+    ORDER['toppings'] = None
     ORDER['no_of_pizza'] = None

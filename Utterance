@@ -24,3 +24,5 @@ ChoosePizzaToppings I want to add more {topping}
 ChoosePizzaSeasonings I want {seasoning} seasoning
 
 numberoforder I want {number} pizzas with same options
+
+StopChoosingToppings that's it
