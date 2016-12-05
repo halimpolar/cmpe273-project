@@ -28,6 +28,17 @@ class OrderHandler:
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return str(values[0][27])
+		
+    def getOrderNumbers(self,sheets=''):
+        values = []
+        if sheets =='':
+            rangeName = self.sheetName + '!B2:B'
+        else:
+            rangeName = self.sheetName +sheets
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values')
+        return (values)       
 
     def placeOrder(self, order):
         # before appending a new row of order,
