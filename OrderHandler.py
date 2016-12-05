@@ -101,6 +101,8 @@ class OrderHandler:
                 spreadsheetId=self.sheetID, range=rangeName,
                 valueInputOption='USER_ENTERED', body=body).execute()
 
+        # after placing a new order, return the order_no and timestamp to user
+        return str(new_order_no),
 
 if __name__ == '__main__':
     test = OrderHandler()
