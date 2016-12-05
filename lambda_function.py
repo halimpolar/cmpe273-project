@@ -76,9 +76,9 @@ def lambda_handler(request_obj, context=None):
         for topping in menuHandler.getPizzaToppings():
             TOPPINGS.append(topping[0].lower())
         # pizza seasonings
-        global TOPPINGS
+        global SEASONINGS
         for topping in menuHandler.getPizzaSeasonings():
-            TOPPINGS.append(topping[0].lower())
+            SEASONINGS.append(topping[0].lower())
 
         # set flag to true
         HasLoaded = True
@@ -107,7 +107,7 @@ def launch_AskName_handler(request):
     # global menuHandler
     name = request.slots["name"]
 
-    reply = "Hi {} .".format(name)
+    reply = "Hi {}. ".format(name)
     # write name into Order
     global ORDER
     ORDER['name'] = name
@@ -121,7 +121,7 @@ def launch_ShowPizzaTypes_handler(request):
     r = "pizza toppings are "
     global PIZZAS
     for x in PIZZAS:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaCrusts")
@@ -129,7 +129,7 @@ def launch_ShowPizzaCrusts_handler(request):
     r = "pizza toppings are "
     global CRUSTS
     for x in CRUSTS:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaToppings")
@@ -137,7 +137,7 @@ def launch_ShowPizzaToppings_handler(request):
     r = "pizza toppings are "
     global TOPPINGS
     for x in TOPPINGS:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaSizes")
@@ -145,7 +145,7 @@ def launch_ShowPizzaSizes_handler(request):
     r = "pizza sizes are "
     global SIZES
     for x in SIZES:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
 @alexa.intent_handler("ShowPizzaSauces")
@@ -153,7 +153,7 @@ def launch_ShowSaucesTypes_handler(request):
     r = "sauces types are "
     global SAUCES
     for x in SAUCES:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
 
 
@@ -162,16 +162,24 @@ def launch_ShowCutsTypes_handler(request):
     r = "cuts types are "
     global CUTS
     for x in CUTS:
-        r = r + '{},'.format(x[0])
+        r = r + '{},'.format(x)
     return alexa.create_response(message=r)
     
 @alexa.intent_handler("ShowPizzaSeasonings")
 def launch_ShowSeasoningsTypes_handler(request):
-    r = "cuts types are "
+    r = "Seasonings are "
     global SEASONINGS
     for x in SEASONINGS:
-        r = r + '{},'.format(x[0])
-    return alexa.create_response(message=r)    
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)
+    
+@alexa.intent_handler("ShowPizzaBakes")
+def launch_ShowBakes_handler(request):
+    r = "bake options are "
+    global BAKES
+    for x in BAKES:
+        r = r + '{},'.format(x)
+    return alexa.create_response(message=r)  
 ''' Showing '''
 
 
