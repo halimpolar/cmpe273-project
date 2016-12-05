@@ -11,6 +11,7 @@ BAKES = []
 SAUCES = []
 CUTS = []
 TOPPINGS = []
+SEASONINGS = []
 ORDER = OrderedDict()
 ORDER['name'] = None
 ORDER['type'] = None
@@ -74,6 +75,11 @@ def lambda_handler(request_obj, context=None):
         global TOPPINGS
         for topping in menuHandler.getPizzaToppings():
             TOPPINGS.append(topping[0].lower())
+        # pizza seasonings
+        global TOPPINGS
+        for topping in menuHandler.getPizzaSeasonings():
+            TOPPINGS.append(topping[0].lower())
+
         # set flag to true
         HasLoaded = True
 
@@ -158,6 +164,14 @@ def launch_ShowCutsTypes_handler(request):
     for x in CUTS:
         r = r + '{},'.format(x[0])
     return alexa.create_response(message=r)
+    
+@alexa.intent_handler("ShowPizzaSeasonings")
+def launch_ShowSeasoningsTypes_handler(request):
+    r = "cuts types are "
+    global SEASONINGS
+    for x in SEASONINGS:
+        r = r + '{},'.format(x[0])
+    return alexa.create_response(message=r)    
 ''' Showing '''
 
 
@@ -293,6 +307,23 @@ def get_toppings_handler(request):
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
         return alexa.create_response(message=reply)
+        
+@alexa.intent_handler("ChoosePizzaSeasonings")
+def get_seasonings_handler(request):
+    seasoning = request.slots["seasoning"]
+
+    reply = 'you ordered ' + seasoning + '. '
+    global SEASONINGS
+    if seasoning in SEASONINGS:
+        reply = 'OK, order ' + seasoning + '. '
+        # save type into order
+        global ORDER
+        ORDER['seasoning'] = seasoning
+        reply += checkIsReady()
+        return alexa.create_response(message=reply)
+    else:
+        reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
+        return alexa.create_response(message=reply)        
         
 ''' Choosing '''
 

@@ -15,8 +15,8 @@ name_type	        name
 pizza_type	        pizza  
 size_type	        size  
 bake_type           bake  
-sauce_type          sauce
-cut_type            cut
-seasoning_type      seasoning
-toppings_type       topping
+sauce_type          sauce  
+cut_type            cut  
+seasoning_type      seasoning  
+toppings_type       topping  
 
