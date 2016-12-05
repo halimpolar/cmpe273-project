@@ -1,6 +1,7 @@
 from ask import alexa
 from MenuHandler import MenuHandler
 from OrderHandler import OrderHandler
+from collections import OrderedDict
 
 HasLoaded = False
 PIZZAS = []
@@ -9,18 +10,17 @@ CRUSTS = []
 BAKES = []
 SAUCES = []
 TOPPINGS = []
-ORDER = {
-    'name': None,
-    'no_of_pizza': 1,
-    'type': None,
-    'size': None,
-    'crust': 'handmade',
-    'sauce': 'barbeque',
-    'bake': 'well done',
-    'cut': 'square',
-    'seasoning': 'garlic seasoned crust',
-    'toppings': ['bacon', 'pineapple', 'none', 'none', 'none']
-}
+ORDER = OrderedDict()
+ORDER['name'] = None
+ORDER['no_of_pizza'] = 1
+ORDER['type'] = None
+ORDER['size'] = None
+ORDER['crust'] = 'handmade'
+ORDER['sauce'] = 'barbeque'
+ORDER['bake'] = 'well done'
+ORDER['cut'] = 'pie'
+ORDER['seasoning'] = 'garlic seasoned crust'
+ORDER['toppings'] = ['bacon', 'pineapple', 'none', 'none', 'none']
 
 
 def lambda_handler(request_obj, context=None):
