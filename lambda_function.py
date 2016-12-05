@@ -342,7 +342,7 @@ def checkIsReady():
     if isReady:
         placeOrder()
         initialzeOrder()
-        return 'Order is ready, Thank you! '
+        return 'Order is done. Please wait for fiveteen minutes to get your pizza. Say check my pizza status for update of your pizza. Thank you! '
     else:
         if key is 'name':
             return 'Please tell me your name. '
