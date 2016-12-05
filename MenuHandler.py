@@ -50,6 +50,13 @@ class MenuHandler:
         values = result.get('values', [])
         return values
 
+    def getPizzaCuts(self):
+        rangeName = self.sheetName + '!I2:I'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return values
+		
     def getPizzaSauces(self):
         rangeName = self.sheetName + '!E2:E'
         result = self.service.spreadsheets().values().get(
