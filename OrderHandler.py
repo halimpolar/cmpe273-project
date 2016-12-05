@@ -17,11 +17,17 @@ class OrderHandler:
         self.sheetName = 'Order'
 
     def getExistingOrders(self):
-        rangeName = self.sheetName + '!A2:AA'
+        rangeName = self.sheetName + '!A2:AC'
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values', [])
         return len(values)
+
+    def getTotalPriceOfNewOrder(self, rangeName):
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        values = result.get('values', [])
+        return str(values[0][27])
 
     def placeOrder(self, order):
         # before appending a new row of order,
@@ -101,6 +107,10 @@ class OrderHandler:
                 spreadsheetId=self.sheetID, range=rangeName,
                 valueInputOption='USER_ENTERED', body=body).execute()
 
+        # after placing a new order, return the order_no and total price to user
+        # fetch the total price
+        rangeName = self.sheetName + '!A' + new_row_num + ':AC' + new_row_num
+        return str(new_order_no), self.getTotalPriceOfNewOrder(rangeName)
 
 if __name__ == '__main__':
     test = OrderHandler()

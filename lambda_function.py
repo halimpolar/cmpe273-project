@@ -112,17 +112,17 @@ def launch_AskName_handler(request):
 ''' Showing '''
 @alexa.intent_handler("ShowPizzaTypes")
 def launch_ShowPizzaTypes_handler(request):
-    '''
     global PIZZAS
     content = ''
     for pizza in PIZZAS:
         content += pizza + ' '
-    card = alexacreate_card(title="Pizza Types", subtitle=None, content=content)
+    card = alexa.create_card(title="Pizza Types", subtitle=None, content=content)
     return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]),
                                  end_session=False, card_obj=card)
     '''
     global PIZZAS
     return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
+    '''
 
 
 @alexa.intent_handler("ShowPizzaCrusts")
@@ -284,9 +284,12 @@ def launch_number_handler(request):
 def checkIsReady():
     isReady, key = hasEnoughInfo()
     if isReady:
-        placeOrder()
+        order_no, total_price = placeOrder()
         initialzeOrder()
-        return 'Order is ready, Thank you! '
+        reply = 'Thank you! Your order number is ' + order_no + '. '
+        reply += 'And the total will be ' + total_price + '. '
+        reply += 'Your pizza will be ready in 15 minutes. '
+        return reply
     else:
         if key is 'name':
             return 'Please tell me your name. '
@@ -323,7 +326,7 @@ def hasEnoughInfo():
 def placeOrder():
     orderHandler = OrderHandler()
     global ORDER
-    orderHandler.placeOrder(ORDER)
+    return orderHandler.placeOrder(ORDER)
 
 
 # after ordering
