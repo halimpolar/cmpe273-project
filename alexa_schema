@@ -22,17 +22,20 @@
       "intent": "ShowPizzaToppings"
     }, 
     {
-      "intent": "ShowPizzaSeasonings"
+      "intent": "ShowPizzaBakes"
     },
     {
-      "intent": "ShowPizzaBakes"
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
     },
     {
       "intent": "AskName", 
       "slots": [
         {
           "name": "name", 
-          "type": "AMAZON.LITERAL"
+          "type": "name_type"
         }]
     },
 	{
@@ -110,16 +113,6 @@
         {
           "name": "bake", 
           "type": "bake_type"
-        }
-      ]
-    },
-    {
-      "intent": "ChoosePizzaSeasonings", 
-      "slots": 
-      [
-        {
-          "name": "seasoning", 
-          "type": "seasoning_type"
         }
       ]
     },
