@@ -22,6 +22,5 @@ ChooseCutTypes I want {cut} cut
 ChoosePizzaToppings I want {topping} in the toppings
 ChoosePizzaToppings I want to add more {topping}
 ChoosePizzaSeasonings I want {seasoning} seasoning
-NumberOfOrder I want {number} pizzas with same options
 
-WritingSheetTest test writing
+numberoforder I want {number} pizzas with same options
