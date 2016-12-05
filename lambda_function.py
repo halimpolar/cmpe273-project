@@ -286,6 +286,13 @@ def launch_ChoosePizzaBake_handler(request):
         return alexa.create_response(message=reply)
 
 
+@alexa.intent_handler('AMAZON.StartOverIntent')
+def launch_AMAZON_StartOverIntent_handler(request):
+    initialzeOrder()
+    reply = "Ok, start over!! "
+    return alexa.create_response(message=reply)
+
+
 @alexa.intent_handler('ChooseSauceTypes')
 def get_sauce_type_handler(request):
     sauce = request.slots["sauce"]
