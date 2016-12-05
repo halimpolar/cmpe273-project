@@ -35,6 +35,16 @@
           "type": "name_type"
         }]
     },
+	{
+      "intent": "OrderStatus", 
+      "slots": 
+      [
+        {
+          "name": "order", 
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
     {
       "intent": "ChoosePizzaTypes", 
       "slots": 
