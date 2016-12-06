@@ -229,7 +229,7 @@ def get_pizza_type_handler(request):
 
 @alexa.intent_handler('ChoosePizzaSizes')
 def get_pizza_size_handler(request):
-    size = request.slots["size"]
+    size = request.slots["size"].lower()
     global SIZES
     if size in SIZES:
         reply = "Ok, you pick " + size + " size. "
@@ -245,7 +245,7 @@ def get_pizza_size_handler(request):
 
 @alexa.intent_handler('ChoosePizzaCrusts')
 def get_pizza_crust_handler(request):
-    crust = request.slots["crust"]
+    crust = request.slots["crust"].lower()
     reply = "your crust will be " + crust + ". "
     global CRUSTS
     if crust in CRUSTS:
@@ -262,7 +262,7 @@ def get_pizza_crust_handler(request):
 
 @alexa.intent_handler('ChoosePizzaBakes')
 def launch_ChoosePizzaBake_handler(request):
-    bake = request.slots["bake"]
+    bake = request.slots["bake"].lower()
     reply = "you want your pizza to be baked in " + bake + ". "
     global BAKES
     if bake in BAKES:
@@ -314,7 +314,7 @@ def launch_ReOrder_handler(request):
 
 @alexa.intent_handler('ChooseSauceTypes')
 def get_sauce_type_handler(request):
-    sauce = request.slots["sauce"]
+    sauce = request.slots["sauce"].lower()
     reply = 'you ordered ' + sauce + '. '
     global SAUCES
     if sauce in SAUCES:
@@ -331,7 +331,7 @@ def get_sauce_type_handler(request):
 
 @alexa.intent_handler('ChooseCutTypes')
 def get_cut_type_handler(request):
-    cut = request.slots["cut"]
+    cut = request.slots["cut"].lower()
 
     reply = 'you ordered ' + cut + '. '
     global CUTS
@@ -350,7 +350,7 @@ def get_cut_type_handler(request):
 @alexa.intent_handler("numberoforder")
 def launch_number_handler(request):
     global ORDER
-    num = request.slots["num"]
+    num = int(request.slots["num"])
     if num >= 1:
         reply = "ordering {} pizzas".format(num)
         ORDER['no_of_pizza'] = num
@@ -364,7 +364,7 @@ def launch_number_handler(request):
 
 @alexa.intent_handler("ChoosePizzaToppings")
 def get_toppings_handler(request):
-    input_topping = request.slots["topping"]
+    input_topping = request.slots["topping"].lower()
 
     reply = 'you ordered ' + input_topping + '. '
     global TOPPINGS
@@ -452,7 +452,7 @@ def checkIsReady():
                 content += str(count) + '. ' + topping + ' '
                 count += 1
         content += '\n'
-        content += 'Number of Pizza: ' + ORDER['no_of_pizza'] + '\n'
+        content += 'Number of Pizza: ' + str(ORDER['no_of_pizza']) + '\n'
         content += 'Total Price: $' + total_price + '\n'
         card = alexa.create_card(title="Pizza Order Detail", subtitle=None, content=content)
         initialzeOrder()
