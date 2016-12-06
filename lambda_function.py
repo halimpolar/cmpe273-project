@@ -94,7 +94,7 @@ def default_handler(request):
 
 @alexa.request_handler("LaunchRequest")
 def launch_request_handler(request):
-    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System. Can I have your name, please?")
+    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System. Can I have your name, please?", end_session=False)
 
 
 @alexa.request_handler("SessionEndedRequest")
@@ -112,7 +112,7 @@ def launch_AskName_handler(request):
     global ORDER
     ORDER['name'] = name
     reply += checkIsReady()
-    return alexa.create_response(message=reply)
+    return alexa.create_response(message=reply, end_session=False)
 
 
 ''' Showing '''
@@ -136,7 +136,7 @@ def launch_ShowPizzaCrusts_handler(request):
     global CRUSTS
     for x in CRUSTS:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ShowPizzaToppings")
@@ -145,7 +145,7 @@ def launch_ShowPizzaToppings_handler(request):
     global TOPPINGS
     for x in TOPPINGS:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ShowPizzaSizes")
@@ -154,7 +154,7 @@ def launch_ShowPizzaSizes_handler(request):
     global SIZES
     for x in SIZES:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ShowPizzaSauces")
@@ -163,7 +163,7 @@ def launch_ShowSaucesTypes_handler(request):
     global SAUCES
     for x in SAUCES:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ShowPizzaCuts")
@@ -172,7 +172,7 @@ def launch_ShowCutsTypes_handler(request):
     global CUTS
     for x in CUTS:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ShowPizzaSeasonings")
@@ -181,7 +181,7 @@ def launch_ShowSeasoningsTypes_handler(request):
     global SEASONINGS
     for x in SEASONINGS:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ShowPizzaBakes")
@@ -190,8 +190,8 @@ def launch_ShowBakes_handler(request):
     global BAKES
     for x in BAKES:
         r = r + '{},'.format(x)
-    return alexa.create_response(message=r)
-	
+    return alexa.create_response(message=r, end_session=False)
+
 @alexa.intent_handler("OrderStatus")
 def launch_OrderStatus_handler(request):
     o = int(request.slots["order"])
@@ -199,7 +199,7 @@ def launch_OrderStatus_handler(request):
     existing_order =[]
     for e in orderHandler.getOrderNumbers():
         existing_order.append(e[0])
-    
+
     if str(o) in existing_order:
         temp = o+1
         sheet = '!AC'+str(temp)+':AC'+str(temp)
@@ -208,13 +208,13 @@ def launch_OrderStatus_handler(request):
         import time
         if (values + 15*60) > time.time():
             min = round(int((((values + 15*60) - time.time())/60)))
-            reply  = 'Your order will be ready in roughly '+str(min)[0:2]+' minutes' 
+            reply  = 'Your order will be ready in roughly '+str(min)[0:2]+' minutes'
         else:
-            reply  = 'Your order is ready! Go grab it.' 
-	    
+            reply  = 'Your order is ready! Go grab it.'
+
     else:
-        reply = 'Im sorry I dont have that order'	
-    return alexa.create_response(message=reply)
+        reply = 'Im sorry I dont have that order'
+    return alexa.create_response(message=reply, end_session=False)
 ''' Showing '''
 
 
@@ -230,10 +230,10 @@ def get_pizza_type_handler(request):
         global ORDER
         ORDER['type'] = pizza
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza types'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler('ChoosePizzaSizes')
@@ -246,10 +246,10 @@ def get_pizza_size_handler(request):
         global ORDER
         ORDER['size'] = size
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not get it, if you want me to read the pizza size, say 'show pizza sizes'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler('ChoosePizzaCrusts')
@@ -263,10 +263,10 @@ def get_pizza_crust_handler(request):
         global ORDER
         ORDER['crust'] = crust
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read the crust choices, say 'show pizza crusts'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler('ChoosePizzaBakes')
@@ -280,10 +280,10 @@ def launch_ChoosePizzaBake_handler(request):
         global ORDER
         ORDER['bake'] = bake
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza bakes'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler('AMAZON.StartOverIntent')
@@ -304,10 +304,10 @@ def get_sauce_type_handler(request):
         global ORDER
         ORDER['sauce'] = sauce
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza sauces'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler('ChooseCutTypes')
@@ -322,10 +322,10 @@ def get_cut_type_handler(request):
         global ORDER
         ORDER['cut'] = cut
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza cuts'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler("numberoforder")
@@ -340,7 +340,7 @@ def launch_number_handler(request):
         # return alexa.create_response(message=reply)
     else:
         reply = "I could not understand it, please say the number of pizza you want"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler("ChoosePizzaToppings")
@@ -353,8 +353,10 @@ def get_toppings_handler(request):
         reply = 'OK, order ' + input_topping + '. '
         # save type into order
         global ORDER
+        '''
         if ORDER['toppings'] is None:
             ORDER['toppings'] = []
+        '''
         ORDER['toppings'].append(input_topping)
         '''
         if len(ORDER['toppings']) < 5:
@@ -363,10 +365,10 @@ def get_toppings_handler(request):
             return alexa.create_response(message='Sorry, you can only choose 5 toppings! ')
         '''
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler("StopChoosingToppings")
@@ -374,14 +376,14 @@ def launch_StopChoosingToppings_handler(request):
     r = ''
     global ORDER
     if len(ORDER['toppings']) is 0:
-        r += "OK, you don't choose any topping. "
+        r += "OK, you don't want any topping. "
     else:
         r += 'Ok, you already chose ' + str(len(ORDER['toppings'])) + ' toppings. '
     count = 5 - len(ORDER['toppings'])
     for x in range(0, count):
         ORDER['toppings'].append('none')
     r += checkIsReady()
-    return alexa.create_response(message=r)
+    return alexa.create_response(message=r, end_session=False)
 
 
 @alexa.intent_handler("ChoosePizzaSeasonings")
@@ -396,10 +398,10 @@ def get_seasonings_handler(request):
         global ORDER
         ORDER['seasoning'] = seasoning
         reply += checkIsReady()
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
     else:
         reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
-        return alexa.create_response(message=reply)
+        return alexa.create_response(message=reply, end_session=False)
 ''' Choosing '''
 
 
@@ -465,6 +467,7 @@ def hasEnoughInfo():
     for key in ORDER.keys():
         if key is 'toppings':
             if ORDER[key] is None:
+                ORDER[key] = []
                 return False, key
             else:
                 if len(ORDER[key]) < 5:
