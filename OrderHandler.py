@@ -38,7 +38,17 @@ class OrderHandler:
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.sheetID, range=rangeName).execute()
         values = result.get('values')
-        return (values)       
+        return (values)    
+		
+    def getPersonOrder(self,name):
+        values = []
+        rangeName = self.sheetName + '!A2:B'
+        result = self.service.spreadsheets().values().get(
+            spreadsheetId=self.sheetID, range=rangeName).execute()
+        for x in result.get('values'):
+            if x[0] == name:
+                values.append(int(x[1]))
+        return (values) 		
 
     def placeOrder(self, order):
         # before appending a new row of order,
