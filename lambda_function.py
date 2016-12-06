@@ -284,6 +284,34 @@ def launch_AMAZON_StartOverIntent_handler(request):
     return alexa.create_response(message=reply)
 
 
+@alexa.intent_handler("ReOrder")
+def launch_ReOrder_handler(request):
+    oid = int(request.slots["orderid"])
+    global ORDER
+    name = ORDER['name']
+    orderHandler = OrderHandler()
+    orders = orderHandler.getPersonOrder(name)
+    if oid in orders:
+        temp = oid+1
+        sheet = '!C'+str(temp)+':Z'
+        get_order = orderHandler.getOrderNumbers(sheet)[0]
+        ORDER = OrderedDict()
+        ORDER['name'] = name
+        ORDER['type'] = get_order[1]
+        ORDER['size'] = get_order[3]
+        ORDER['crust'] = get_order[5]
+        ORDER['sauce'] = get_order[7]
+        ORDER['bake'] = get_order[9]
+        ORDER['cut'] = get_order[11]
+        ORDER['seasoning'] = get_order[13]
+        ORDER['toppings'] = [get_order[15],get_order[17],get_order[19],get_order[21],get_order[23]]
+        ORDER['no_of_pizza'] = get_order[0]
+        return checkIsReady()
+    else:
+        return alexa.create_response(message='Im sorry i dont find that order in your name. Please try again.')	
+	
+
+
 @alexa.intent_handler('ChooseSauceTypes')
 def get_sauce_type_handler(request):
     sauce = request.slots["sauce"]
