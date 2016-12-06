@@ -223,7 +223,7 @@ def get_pizza_type_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza types'"
+        reply = "I could not find it. says 'show pizza types' to see your options"
         return alexa.create_response(message=reply, end_session=False)
 
 
@@ -232,14 +232,14 @@ def get_pizza_size_handler(request):
     size = request.slots["size"]
     global SIZES
     if size in SIZES:
-        reply = "Ok, ordering pizza in size of " + size + ". "
+        reply = "Ok, you pick " + size + " size. "
         # save size into order
         global ORDER
         ORDER['size'] = size
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
-        reply = "I could not get it, if you want me to read the pizza size, say 'show pizza sizes'"
+        reply = "I could not get it. says 'show pizza sizes' to see your options"
         return alexa.create_response(message=reply, end_session=False)
 
 
@@ -256,7 +256,7 @@ def get_pizza_crust_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
-        reply = "I could not find it, if you want me to read the crust choices, say 'show pizza crusts'"
+        reply = "I could not find it. says 'show pizza crusts' to see your options"
         return alexa.create_response(message=reply, end_session=False)
 
 
@@ -308,7 +308,7 @@ def launch_ReOrder_handler(request):
         ORDER['no_of_pizza'] = get_order[0]
         return checkIsReady()
     else:
-        return alexa.create_response(message='Im sorry i dont find that order in your name. Please try again.')	
+        return alexa.create_response(message='I am sorry i dont find that order in your name. Please try again.')	
 	
 
 
@@ -325,7 +325,7 @@ def get_sauce_type_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
-        reply = "I could not find it, if you want me to read the sauce types, say 'show pizza sauces'"
+        reply = "I could not find it. says 'show pizza sauces' to see your options"
         return alexa.create_response(message=reply, end_session=False)
 
 
@@ -343,7 +343,7 @@ def get_cut_type_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
-        reply = "I could not find it, if you want me to read the cut options, say 'show pizza cuts'"
+        reply = "I could not find it. says 'show pizza cuts' to see your options"
         return alexa.create_response(message=reply, end_session=False)
 
 
@@ -358,7 +358,7 @@ def launch_number_handler(request):
         return checkIsReady()
         # return alexa.create_response(message=reply)
     else:
-        reply = "I could not understand it, please say the number of pizza you want"
+        reply = "I could not get it, please say the number of pizza you want"
         return alexa.create_response(message=reply, end_session=False)
 
 
@@ -386,7 +386,7 @@ def get_toppings_handler(request):
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
-        reply = "I could not find it, if you want me to read menu, say 'show pizza toppings'"
+        reply = "I could not find it. says 'show pizza toppings' to see your options"
         return alexa.create_response(message=reply, end_session=False)
 
 
