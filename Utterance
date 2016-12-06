@@ -10,7 +10,6 @@ ShowPizzaCrusts show pizza crusts
 ShowPizzaSauces show pizza sauces
 ShowPizzaCuts show pizza cuts
 ShowPizzaToppings show pizza toppings
-ShowPizzaSeasonings show pizza seasonings
 ShowPizzaBakes show pizza bakes
 
 ChoosePizzaTypes I want {pizza} pizza
@@ -21,11 +20,15 @@ ChooseSauceTypes I want {sauce} sauce
 ChooseCutTypes I want {cut} cut
 ChoosePizzaToppings I want {topping} in the toppings
 ChoosePizzaToppings I want to add more {topping}
-ChoosePizzaSeasonings I want {seasoning} seasoning
 
-numberoforder I want {number} pizzas with same options
+AMAZON.YesIntent yes please
+AMAZON.NoIntent no thanks
+
+numberoforder I want {num} pizzas with same options
 
 StopChoosingToppings that's it
 
 OrderStatus what is status of my order {order}
 OrderStatus what is status of order {order}
+
+AMAZON.StartOverIntent restart
