@@ -37,3 +37,11 @@ I want to add more {topping}   / I want {topping} in the toppings
 Shredded Parmesan Asiago / Banana Peppers / Garlic / Jalapeno Peppers / Pineapple / Roasted Red Peppers / 
 Tomatoes / Hot Sauce / Feta Cheese / Shredded Provolone Cheese / Black Olives / Green Peppers / Mushrooms / 
 Onions / Spinach / Diced Tomatoes
+
+TO RESTART/REFRESH:
+restart
+
+TO REORDER WITHA ORDERID:
+order {orderid} again
+re order {orderid} for me
+just re order my order {orderid}
