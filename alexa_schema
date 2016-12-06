@@ -23,10 +23,23 @@
     }, 
     {
       "intent": "ShowPizzaBakes"
-	},
-	{
-	  "intent": "AMAZON.StartOverIntent"
-	},
+    },
+    {
+      "intent": "AMAZON.StartOverIntent"
+    },
+    {
+      "intent": "CancelOrder"
+    },
+    {
+      "intent": "ReOrder", 
+      "slots": 
+      [
+        {
+          "name": "orderid", 
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
     {
       "intent": "AMAZON.YesIntent"
     },
