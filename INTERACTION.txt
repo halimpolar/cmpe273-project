@@ -12,7 +12,7 @@ I want {size} size
 
 CRUST:
 I want {crust} crust
-------Hand Tossed  / Handmade / Crunchy Thin Crust / Brooklyn Style / Gluten Free
+------Hand Tossed  / Handmade / Crunchy Thin Crust / Gluten Free
 
 SAUCE:
 I want {sauce} sauce
@@ -37,6 +37,9 @@ I want to add more {topping}   / I want {topping} in the toppings
 Shredded Parmesan Asiago / Banana Peppers / Garlic / Jalapeno Peppers / Pineapple / Roasted Red Peppers / 
 Tomatoes / Hot Sauce / Feta Cheese / Shredded Provolone Cheese / Black Olives / Green Peppers / Mushrooms / 
 Onions / Spinach / Diced Tomatoes
+
+NO OF ORDER:
+I want {num} pizzas with same options
 
 TO RESTART/REFRESH:
 restart
