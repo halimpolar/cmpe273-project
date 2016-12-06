@@ -32,3 +32,10 @@ OrderStatus what is status of my order {order}
 OrderStatus what is status of order {order}
 
 AMAZON.StartOverIntent restart
+
+CancelOrder cancel my order
+CancelOrder alexa cancel my order
+
+ReOrder order {orderid} again
+ReOrder re order {orderid} for me
+ReOrder just re order my order {orderid}
