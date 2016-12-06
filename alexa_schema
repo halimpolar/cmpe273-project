@@ -28,9 +28,6 @@
       "intent": "AMAZON.StartOverIntent"
     },
     {
-      "intent": "CancelOrder"
-    },
-    {
       "intent": "ReOrder", 
       "slots": 
       [
