@@ -34,7 +34,7 @@ TOPPINGS:
 I want to add more {topping}   / I want {topping} in the toppings
 
 --------Philly Steak / Bacon / Premium Chicken / Italian Sausage / Beef / Ham / Salami / Cheddar Cheese / 
-Shredded Parmesan Asiago / Banana Peppers / Garlic / Jalapeno Peppers / Pineapple / Roasted Red Peppers / 
+Shredded Parmesan Asiago / Banana Peppers / Garlic / Pineapple / Roasted Red Peppers / 
 Tomatoes / Hot Sauce / Feta Cheese / Shredded Provolone Cheese / Black Olives / Green Peppers / Mushrooms / 
 Onions / Spinach / Diced Tomatoes
 
