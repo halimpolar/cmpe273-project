@@ -361,7 +361,7 @@ def launch_ReOrder_handler(request):
         temp = oid+1
         sheet = '!C'+str(temp)+':Z'
         get_order = orderHandler.getOrderNumbers(sheet)[0]
-        ORDER = OrderedDict()
+        # ORDER = OrderedDict()
         ORDER['name'] = name
         ORDER['type'] = get_order[1]
         ORDER['size'] = get_order[3]
@@ -372,8 +372,8 @@ def launch_ReOrder_handler(request):
         ORDER['seasoning'] = get_order[13]
         ORDER['toppings'] = [get_order[15], get_order[17], get_order[19], get_order[21], get_order[23]]
         ORDER['no_of_pizza'] = get_order[0]
-        reply += checkIsReady()
-        return alexa.create_response(message=reply, end_session=False)
+        reply, card = checkIsReady()
+        return alexa.create_response(message=reply, end_session=False, card_obj=card)
     else:
         return alexa.create_response(message='I am sorry i dont find that order in your name. Please try again.')
 
