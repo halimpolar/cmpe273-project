@@ -25,10 +25,12 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Verify the schema and utterances are configured properly following alexa_schema and output
 - Load the customized slots accordingly
 - Wrap the lambda function and hook the Amazon Echo Device
+- Use https://docs.google.com/spreadsheets/d/1rJ6-8LPsQJFXMeQVC-RfruSuF5IQO57Oujvl2FHjgR8/ for layout of different sheets or set up your own google sheet.  
 - Setup the Amazon Echo Device and you can start interacting with it
-- Follow the Interaction.txt to provide the right utterance
+- Follow the Interaction.txt to provide the right utterance  
 
-  * Custom Slots:  
+
+  * Custom Slots:  (you can add more in name type, but if you add more in any other slots, need to change ActualMenu sheet as well  
     * Type ----- Values  	
     * crust_type ----- Hand Tossed | Handmade | Crunchy Thin Crust | Gluten Free  
     * name_type ----- Polar | Vimmi | Quang | Harry    
@@ -45,5 +47,5 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Vimmi Swami
 - Yu-Chen Ku
 
-
+<b>Team Flash<b>  
 San Jose State University - Fall 2016
