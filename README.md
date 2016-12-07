@@ -23,7 +23,10 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Setup the Amazon Lambda environment
 - Upload 'Pizza_Lambda.zip' to Lambda
 - Verify the schema and utterances are configured properly following alexa_schema and output
-- Load the customized slots accordingly:
+- Load the customized slots accordingly
+- Wrap the lambda function and hook the Amazon Echo Device
+- Setup the Amazon Echo Device and you can start interacting with it
+- Follow the Interaction.txt to provide the right utterance
 
   * Custom Slots:  
     * Type ----- Values  	
