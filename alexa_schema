@@ -1,5 +1,23 @@
 {
   "intents": [
+	{
+	  "intent": "IsMember",
+      "slots": [
+        {
+          "name": "customer_id",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+	{
+      "intent": "IsNotMember"
+    },
+	{
+      "intent": "EnrollForAwards"
+    },
+    {
+      "intent": "NotEnrollForAwards"
+    },
     {
       "intent": "StopChoosingToppings"
     }, 

@@ -94,12 +94,75 @@ def default_handler(request):
 
 @alexa.request_handler("LaunchRequest")
 def launch_request_handler(request):
-    return alexa.create_response(message="Hello! Welcome to the Pizza Ordering System. Can I have your name, please?", end_session=False)
+    reply = 'Hello! '
+    global ORDER
+    if ORDER['name'] is not None:
+        reply += ORDER['name'] + ' '
+    reply += 'Welcome to the Pizza Ordering System. '
+    reply += checkIsReady()
+    return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.request_handler("SessionEndedRequest")
 def session_ended_request_handler(request):
     return alexa.create_response(message="Goodbye!")
+
+
+@alexa.intent_handler("EnrollForAwards")
+def launch_AskForEnroll_handler(request):
+    global ORDER
+    ORDER['ask_enroll'] = True
+    orderHandler = OrderHandler()
+    new_member_no = orderHandler.createNewMember(ORDER['name'], ORDER['no_of_pizza'])
+    ORDER['member'] = {
+        'ID': new_member_no,
+        'Name': ORDER['name'],
+        'Awards': 0
+    }
+    reply = 'Great, you member id is: ' + str(new_member_no)
+    r, card = checkIsReady()
+    reply += r
+    return alexa.create_response(message=reply, end_session=False, card_obj=card)
+
+
+@alexa.intent_handler("NotEnrollForAwards")
+def launch_AskForEnroll_handler(request):
+    global ORDER
+    ORDER['ask_enroll'] = False
+    reply = "Ok, no problem! "
+    r, card = checkIsReady()
+    reply += r
+    return alexa.create_response(message=reply, end_session=False, card_obj=card)
+
+
+@alexa.intent_handler("IsNotMember")
+def launch_IsMember_handler(request):
+    orderHandler = OrderHandler()
+    global ORDER
+    ORDER['member'] = {}
+    reply = "it's fine! You can join later. "
+    reply += checkIsReady()
+    return alexa.create_response(message=reply, end_session=False)
+
+
+@alexa.intent_handler("IsMember")
+def launch_IsMember_handler(request):
+    customer_id = request.slots["customer_id"]
+    orderHandler = OrderHandler()
+    global ORDER
+    ORDER['member'] = {}
+    for member in orderHandler.getCustomerInfos():
+        if int(customer_id) is int(member['ID']):
+            ORDER['member'] = member
+            ORDER['ask_enroll'] = True
+            ORDER['name'] = member['Name']
+
+    if ORDER['member'] != {}:
+        reply = "Hi {}, welcome back. ".format(ORDER['name'])
+    else:
+        reply = "Sorry, We don't have your info in our database. "
+    reply += checkIsReady()
+    return alexa.create_response(message=reply, end_session=False)
 
 
 @alexa.intent_handler("AskName")
@@ -183,11 +246,12 @@ def launch_ShowBakes_handler(request):
         r = r + '{},'.format(x)
     return alexa.create_response(message=r, end_session=False)
 
+
 @alexa.intent_handler("OrderStatus")
 def launch_OrderStatus_handler(request):
     o = int(request.slots["order"])
     orderHandler = OrderHandler()
-    existing_order =[]
+    existing_order = []
     for e in orderHandler.getOrderNumbers():
         existing_order.append(e[0])
 
@@ -199,9 +263,9 @@ def launch_OrderStatus_handler(request):
         import time
         if (values + 15*60) > time.time():
             min = round(int((((values + 15*60) - time.time())/60)))
-            reply  = 'Your order will be ready in roughly '+str(min)[0:2]+' minutes'
+            reply = 'Your order will be ready in roughly ' + str(min)[0:2] + ' minutes'
         else:
-            reply  = 'Your order is ready! Go grab it.'
+            reply = 'Your order is ready! Go grab it.'
 
     else:
         reply = 'Im sorry I dont have that order'
@@ -304,12 +368,11 @@ def launch_ReOrder_handler(request):
         ORDER['bake'] = get_order[9]
         ORDER['cut'] = get_order[11]
         ORDER['seasoning'] = get_order[13]
-        ORDER['toppings'] = [get_order[15],get_order[17],get_order[19],get_order[21],get_order[23]]
+        ORDER['toppings'] = [get_order[15], get_order[17], get_order[19], get_order[21], get_order[23]]
         ORDER['no_of_pizza'] = get_order[0]
         return checkIsReady()
     else:
-        return alexa.create_response(message='I am sorry i dont find that order in your name. Please try again.')	
-	
+        return alexa.create_response(message='I am sorry i dont find that order in your name. Please try again.')
 
 
 @alexa.intent_handler('ChooseSauceTypes')
@@ -352,11 +415,11 @@ def launch_number_handler(request):
     global ORDER
     num = request.slots["num"]
     if num >= 1:
-        reply = "ordering {} pizzas".format(num)
+        reply = "ordering {} pizzas ".format(num)
         ORDER['no_of_pizza'] = num
-        # reply += checkIsReady()
-        return checkIsReady()
-        # return alexa.create_response(message=reply)
+        r, card = checkIsReady()
+        reply += r
+        return alexa.create_response(message=reply, card_obj=card)
     else:
         reply = "I could not get it, please say the number of pizza you want"
         return alexa.create_response(message=reply, end_session=False)
@@ -430,10 +493,15 @@ def get_seasonings_handler(request):
 def checkIsReady():
     isReady, key = hasEnoughInfo()
     if isReady:
-        order_no, total_price = placeOrder()
+        order_no, total_price, awards, redeemCount = placeOrder()
         reply = 'Thank you! Your order number is ' + order_no + '. '
         reply += 'And the total will be $' + total_price + '. '
         reply += 'Your pizza will be ready in 15 minutes. '
+        if redeemCount > 0:
+            reply += 'Congratulations, you have ' + str(redeemCount) + ' free pizza in this order. '
+        if awards is not None:
+            difference_awards = 10 - int(awards)
+            reply += 'Order ' + str(difference_awards) + " more pizzas, and you will get one free. "
         # return complete info to user for the order
         global ORDER
         content = 'Order Number: ' + order_no + '\n'
@@ -452,16 +520,16 @@ def checkIsReady():
                 content += str(count) + '. ' + topping + ' '
                 count += 1
         content += '\n'
-        content += 'Number of Pizza: ' + ORDER['no_of_pizza'] + '\n'
+        content += 'Number of Pizza: ' + str(ORDER['no_of_pizza']) + '\n'
         content += 'Total Price: $' + total_price + '\n'
         card = alexa.create_card(title="Pizza Order Detail", subtitle=None, content=content)
         initialzeOrder()
-        return alexa.create_response(message=reply, end_session=False, card_obj=card)
+        return reply, card
     else:
-        if key is 'name':
+        if key is 'member':
+            return 'Are you in our membership? '
+        elif key is 'name':
             return 'Please tell me your name. '
-        elif key is 'no_of_pizza':
-            return 'How many pizza do you want? '
         elif key is 'type':
             return 'Please choose a type of pizza. '
         elif key is 'size':
@@ -480,6 +548,10 @@ def checkIsReady():
             return 'Do you want any topping? You can choose 5 toppings if you want. '
         elif key is 'more_toppings':
             return 'Any other toppings? '
+        elif key is 'no_of_pizza':
+            return 'How many pizza do you want? '
+        elif key is 'ask_enroll':
+            return 'Do you want to join our awards program? ', None
 
 
 # check the information we want before writting to sheet
@@ -504,13 +576,16 @@ def hasEnoughInfo():
 def placeOrder():
     orderHandler = OrderHandler()
     global ORDER
-    return orderHandler.placeOrder(ORDER)
+    if ORDER['member'] != {}:
+        return orderHandler.placeOrder(ORDER, ORDER['member'])
+    return orderHandler.placeOrder(ORDER, None)
 
 
 # after ordering
 def initialzeOrder():
     global ORDER
     ORDER = OrderedDict()
+    ORDER['member'] = None
     ORDER['name'] = None
     ORDER['type'] = None
     ORDER['size'] = None
@@ -521,3 +596,4 @@ def initialzeOrder():
     ORDER['seasoning'] = None
     ORDER['toppings'] = None
     ORDER['no_of_pizza'] = None
+    ORDER['ask_enroll'] = None

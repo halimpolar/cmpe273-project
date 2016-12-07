@@ -36,3 +36,8 @@ AMAZON.StartOverIntent restart
 ReOrder order {orderid} again
 ReOrder re order {orderid} for me
 ReOrder just re order my order {orderid}
+
+IsMember my customer id is {customer_id}
+IsMember i don't have the membership
+NotEnrollForAwards maybe next time
+EnrollForAwards ok let me in
