@@ -41,7 +41,7 @@ ReOrder just re order my order {orderid}
 IsMember my customer id is {customer_id}
 IsMember my membership number is {customer_id}
 IsMember i don't have the membership
-IsMember No, I am not in the reward program
+IsMember No I am not in the reward program
 
 NotEnrollForAwards maybe next time
 EnrollForAwards ok let me in
