@@ -427,7 +427,7 @@ def get_toppings_handler(request):
         reply = 'OK, add ' + input_topping + '. '
         # save type into order
         global ORDER
-        ORDER['toppings'].append(input_topping)
+        ORDER['toppings'].append(input_topping)	
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
@@ -507,7 +507,7 @@ def checkIsReady():
         return reply, card
     else:
         if key is 'member':
-            return 'Are you in our membership? '
+            return 'Are you in our membership program? '
         elif key is 'name':
             return 'Please tell me your name. '
         elif key is 'type':
