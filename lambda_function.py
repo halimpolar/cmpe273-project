@@ -372,7 +372,8 @@ def launch_ReOrder_handler(request):
         ORDER['seasoning'] = get_order[13]
         ORDER['toppings'] = [get_order[15], get_order[17], get_order[19], get_order[21], get_order[23]]
         ORDER['no_of_pizza'] = get_order[0]
-        return checkIsReady()
+        reply += checkIsReady()
+        return alexa.create_response(message=reply, end_session=False)
     else:
         return alexa.create_response(message='I am sorry i dont find that order in your name. Please try again.')
 
