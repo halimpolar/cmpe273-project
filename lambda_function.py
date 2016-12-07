@@ -138,7 +138,7 @@ def launch_AskForEnroll_handler(request):
 
 
 @alexa.intent_handler("IsNotMember")
-def launch_IsMember_handler(request):
+def launch_IsNotMember_handler(request):
     orderHandler = OrderHandler()
     global ORDER
     ORDER['member'] = {}
