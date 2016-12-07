@@ -49,3 +49,15 @@ TO REORDER WITHA ORDERID:
 order {orderid} again
 re order {orderid} for me
 just re order my order {orderid}
+
+TO JOIN AWARDS PROGRAM:
+ok let me in
+
+NOT TO JOIN AWARDS PROGRAM:
+maybe next time
+
+GIVE CUSTOMER ID:
+my customer id is {customer_id}
+
+DOESN'T HAVA CUSTOMER ID:
+i don't have the membership
