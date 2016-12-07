@@ -430,20 +430,14 @@ def get_toppings_handler(request):
     input_topping = request.slots["topping"].lower()
     global TOPPINGS
     if input_topping in TOPPINGS:
-        reply = 'OK, add ' + input_topping + '. '
         # save type into order
+        reply = ''
         global ORDER
-        '''
-        if ORDER['toppings'] is None:
-            ORDER['toppings'] = []
-        '''
-        ORDER['toppings'].append(input_topping)
-        '''
         if len(ORDER['toppings']) < 5:
+            reply += 'OK, add ' + input_topping + '. '
             ORDER['toppings'].append(input_topping)
         else:
-            return alexa.create_response(message='Sorry, you can only choose 5 toppings! ')
-        '''
+            reply = 'Sorry, you can only choose 5 toppings! '
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
