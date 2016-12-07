@@ -128,7 +128,7 @@ def launch_AskForEnroll_handler(request):
 
 
 @alexa.intent_handler("NotEnrollForAwards")
-def launch_AskForEnroll_handler(request):
+def launch_AskForNotEnroll_handler(request):
     global ORDER
     ORDER['ask_enroll'] = False
     reply = "Ok, no problem! "
