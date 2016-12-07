@@ -189,10 +189,6 @@ def launch_ShowPizzaTypes_handler(request):
         r = r + '{},'.format(x)
     card = alexa.create_card(title="Pizza Menu", subtitle=None, content=r)
     return alexa.create_response(message=r, end_session=False, card_obj=card)
-    '''
-    global PIZZAS
-    return alexa.create_response(message="pizza types: {}, {}".format(PIZZAS[0], PIZZAS[1]))
-    '''
 
 
 @alexa.intent_handler("ShowPizzaCrusts")
@@ -431,17 +427,7 @@ def get_toppings_handler(request):
         reply = 'OK, add ' + input_topping + '. '
         # save type into order
         global ORDER
-        '''
-        if ORDER['toppings'] is None:
-            ORDER['toppings'] = []
-        '''
         ORDER['toppings'].append(input_topping)
-        '''
-        if len(ORDER['toppings']) < 5:
-            ORDER['toppings'].append(input_topping)
-        else:
-            return alexa.create_response(message='Sorry, you can only choose 5 toppings! ')
-        '''
         reply += checkIsReady()
         return alexa.create_response(message=reply, end_session=False)
     else:
