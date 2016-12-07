@@ -1,6 +1,6 @@
 # Pizza Ordering System with Amazon Echo
 
-This project serves the goal of SJSU CMPE-273 class in developing A Pizza Ordering System by using Amazon Echo Device. This project a group project collaborated by four students.
+This project serves the goal of SJSU CMPE-273 class in developing A Pizza Ordering System by using Amazon Echo Device. This project is a group project collaborated by four students.
 
 <b>System Requirement</b>
 - AWS Lambda
