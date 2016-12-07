@@ -25,20 +25,22 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Verify the schema and utterances are configured properly following alexa_schema and output
 - Load the customized slots accordingly:
 
-Custom Slots:  
-Type ----- Values  	
-crust_type ----- Hand Tossed | Handmade | Crunchy Thin Crust | Brooklyn Style | Gluten Free  
-name_type ----- name  
-pizza_type ----- Extravaganzza | Meatzza | Philly Cheese Steak | Pacific Veggie | Honolulu Hawaiian | Deluxe | Cali Chicken Bacon Ranch | Buffalo Chicken | Ultimate Pepperoni | Memphis BBQ Chicken | Wisconsin Six Challenge | Spinach and Feta   
-size_type ----- Small | Medium | Large | Extra Large  
-bake_type ----- Well Done | Normal  
-sauce_type ----- Robust Inspired Tomato | Hearty Marinara | Barbeque | Garlic Parmesan White | Alfredo   
-cut_type ----- Pie | Square | Uncut  
-topping_type ----- Pepperoni | Sliced Italian Sausage | Philly Steak | Bacon | Premium Chicken | Italian Sausage | Beef | Ham | Salami | Cheddar Cheese | Shredded Parmesan Asiago | Banana Peppers | Garlic | Jalapeno Peppers | Pineapple | Roasted Red Peppers | Tomatoes | Hot Sauce | Feta Cheese | Shredded Provolone Cheese | Black Olives | Green Peppers | Mushrooms | Onions | Spinach | Diced Tomatoes   
+  * Custom Slots:  
+    * Type ----- Values  	
+    * crust_type ----- Hand Tossed | Handmade | Crunchy Thin Crust | Brooklyn Style | Gluten Free  
+    * name_type ----- name  
+    * pizza_type ----- Extravaganzza | Meatzza | Philly Cheese Steak | Pacific Veggie | Honolulu Hawaiian | Deluxe | Cali Chicken Bacon Ranch | Buffalo Chicken | Ultimate Pepperoni | Memphis BBQ Chicken | Wisconsin Six Challenge | Spinach and Feta   
+    * size_type ----- Small | Medium | Large | Extra Large  
+    * bake_type ----- Well Done | Normal  
+    * sauce_type ----- Robust Inspired Tomato | Hearty Marinara | Barbeque | Garlic Parmesan White | Alfredo   
+    * cut_type ----- Pie | Square | Uncut  
+    * topping_type ----- Pepperoni | Sliced Italian Sausage | Philly Steak | Bacon | Premium Chicken | Italian Sausage | Beef | Ham | Salami | Cheddar Cheese | Shredded Parmesan Asiago | Banana Peppers | Garlic | Jalapeno Peppers | Pineapple | Roasted Red Peppers | Tomatoes | Hot Sauce | Feta Cheese | Shredded Provolone Cheese | Black Olives | Green Peppers | Mushrooms | Onions | Spinach | Diced Tomatoes   
 
 <b>Contributing Members: </b>
 - Polar Halim
 - Quang Pham
 - Vimmi Swami
 - Yu-Chen Ku
+
+
 San Jose State University - Fall 2016
