@@ -13,6 +13,7 @@ CUTS = []
 SEASONINGS = []
 TOPPINGS = []
 ORDER = OrderedDict()
+ORDER['member'] = None
 ORDER['name'] = None
 ORDER['type'] = None
 ORDER['size'] = None
@@ -23,6 +24,7 @@ ORDER['cut'] = None
 ORDER['seasoning'] = None
 ORDER['toppings'] = None
 ORDER['no_of_pizza'] = None
+ORDER['ask_enroll'] = None
 
 
 def lambda_handler(request_obj, context=None):
@@ -94,10 +96,10 @@ def default_handler(request):
 
 @alexa.request_handler("LaunchRequest")
 def launch_request_handler(request):
-    reply = 'Hello! '
+    reply = 'Hello, '
     global ORDER
     if ORDER['name'] is not None:
-        reply += ORDER['name'] + ' '
+        reply += ORDER['name'] + '. '
     reply += 'Welcome to the Pizza Ordering System. '
     reply += checkIsReady()
     return alexa.create_response(message=reply, end_session=False)
@@ -119,7 +121,7 @@ def launch_AskForEnroll_handler(request):
         'Name': ORDER['name'],
         'Awards': 0
     }
-    reply = 'Great, you member id is: ' + str(new_member_no)
+    reply = 'Great, you member ID is: ' + str(new_member_no) + '. '
     r, card = checkIsReady()
     reply += r
     return alexa.create_response(message=reply, end_session=False, card_obj=card)
@@ -160,7 +162,7 @@ def launch_IsMember_handler(request):
     if ORDER['member'] != {}:
         reply = "Hi {}, welcome back. ".format(ORDER['name'])
     else:
-        reply = "Sorry, We don't have your info in our database. "
+        reply = "Sorry, We don't have your information in our database. "
     reply += checkIsReady()
     return alexa.create_response(message=reply, end_session=False)
 
@@ -277,10 +279,9 @@ def launch_OrderStatus_handler(request):
 @alexa.intent_handler('ChoosePizzaTypes')
 def get_pizza_type_handler(request):
     pizza = request.slots["pizza"].lower()
-    reply = 'you ordered ' + pizza
     global PIZZAS
     if pizza in PIZZAS:
-        reply = 'OK, order ' + pizza
+        reply = 'OK, order ' + pizza + '. '
         # save type into order
         global ORDER
         ORDER['type'] = pizza
@@ -378,10 +379,9 @@ def launch_ReOrder_handler(request):
 @alexa.intent_handler('ChooseSauceTypes')
 def get_sauce_type_handler(request):
     sauce = request.slots["sauce"].lower()
-    reply = 'you ordered ' + sauce + '. '
     global SAUCES
     if sauce in SAUCES:
-        reply = 'OK, order ' + sauce + '. '
+        reply = 'OK, ' + sauce + ' sauce. '
         # save type into order
         global ORDER
         ORDER['sauce'] = sauce
@@ -395,11 +395,9 @@ def get_sauce_type_handler(request):
 @alexa.intent_handler('ChooseCutTypes')
 def get_cut_type_handler(request):
     cut = request.slots["cut"].lower()
-
-    reply = 'you ordered ' + cut + '. '
     global CUTS
     if cut in CUTS:
-        reply = 'OK, order ' + cut + '. '
+        reply = 'OK, ' + cut + ' cut. '
         # save type into order
         global ORDER
         ORDER['cut'] = cut
@@ -415,7 +413,7 @@ def launch_number_handler(request):
     global ORDER
     num = int(request.slots["num"])
     if num >= 1:
-        reply = "ordering {} pizzas ".format(num)
+        reply = "ordering {} pizzas. ".format(num)
         ORDER['no_of_pizza'] = num
         r, card = checkIsReady()
         reply += r
@@ -428,11 +426,9 @@ def launch_number_handler(request):
 @alexa.intent_handler("ChoosePizzaToppings")
 def get_toppings_handler(request):
     input_topping = request.slots["topping"].lower()
-
-    reply = 'you ordered ' + input_topping + '. '
     global TOPPINGS
     if input_topping in TOPPINGS:
-        reply = 'OK, order ' + input_topping + '. '
+        reply = 'OK, add ' + input_topping + '. '
         # save type into order
         global ORDER
         '''
@@ -470,8 +466,7 @@ def launch_StopChoosingToppings_handler(request):
 
 @alexa.intent_handler("AMAZON.YesIntent")
 def get_seasonings_handler(request):
-    # seasoning = request.slots["seasoning"]
-    reply = 'you ordered garlic seasoned crust'
+    reply = 'Ok, you want garlic seasoned crust. '
     global ORDER
     ORDER['seasoning'] = 'Garlic Seasoned Crust'
     reply += checkIsReady()
@@ -480,8 +475,7 @@ def get_seasonings_handler(request):
 
 @alexa.intent_handler("AMAZON.NoIntent")
 def get_seasonings_handler(request):
-    # seasoning = request.slots["seasoning"]
-    reply = 'you do not want any seasoning'
+    reply = 'Ok, you do not want any seasoning. '
     global ORDER
     ORDER['seasoning'] = 'none'
     reply += checkIsReady()
