@@ -9,7 +9,7 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Amazon Echo Device
 - Python 2.7
 
-<b>What does it application do?</b>
+<b>What does the application do?</b>
 - Order pizzas via Amazon Echo
 - Users can customize the pizza according to the preference
 - Ability to check the status of the pizza once it is placed
@@ -18,6 +18,11 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Save the history of the previous order 
 - Cancel unfinished or wrong order
 - Provide a card for order clarification
+
+<b>Integration with Google API</b>
+- Follow the instructions from Google for obtaining the API key
+- Download the key you obtaining from Google
+- Put the key into folder and name it with the name: 'Alexa_Pizza.json'
 
 <b>How to test it?</b>
 - Setup the Amazon Lambda environment
