@@ -1,10 +1,17 @@
+
+GIVE CUSTOMER ID:
+my customer id is {customer_id}
+
+DOESN'T HAVA CUSTOMER ID:
+i don't have the membership
+
 NAME:
 my name is {name} / I'm {name} / I am {name} / it's {name} / it is {name}
 
 PIZZA:							
 I want {pizza} pizza
 ------Extravaganzza / Meatzza / Philly Cheese Steak / Pacific Veggie / Honolulu Hawaiian / Deluxe /
-Cali Chicken Bacon Ranch / Buffalo Chicken / Ultimate Pepperoni / Memphis BBQ Chicken / Wisconsin 6 Challenge / Spinach and Feta
+Cali Chicken Bacon Ranch / Buffalo Chicken / Ultimate Pepperoni / Memphis Barbecue Chicken / Wisconsin 6 Challenge / Spinach and Feta
 
 SIZE:
 I want {size} size
@@ -16,7 +23,7 @@ I want {crust} crust
 
 SAUCE:
 I want {sauce} sauce
-------Robust Inspired Tomato / Hearty Marinara / Barbeque / Garlic Parmesan White / Alfredo
+------Robust Inspired Tomato / Hearty Marinara / Barbecue / Garlic Parmesan White / Alfredo
 
 BAKE:
 I want pizza baked in {bake}
@@ -33,14 +40,17 @@ I want {seasoning} seasoning
 TOPPINGS:
 I want to add more {topping}   / I want {topping} in the toppings
 
---------None / Pepperoni /Sliced Italian Sausage / Philly Steak / Bacon / Premium Chicken / Italian Sausage / Beef / Ham / Salami / Cheddar Cheese / Shredded Parmesan Asiago / Banana Peppers / Garlic / Pineapple / Roasted Red Peppers / Tomatoes / Hot Sauce / Feta Cheese / Shredded Provolone Cheese / Black Olives / Green Peppers / Mushrooms / Onions / Spinach / Diced Tomatoes
+--------Pepperoni /Sliced Italian Sausage / Philly Steak / Bacon / Premium Chicken / Italian Sausage / Beef / Ham / Salami / Cheddar Cheese / Shredded Parmesan Asiago / Banana Peppers / Garlic / Pineapple / Roasted Red Peppers / Tomatoes / Hot Sauce / Feta Cheese / Shredded Provolone Cheese / Black Olives / Green Peppers / Mushrooms / Onions / Spinach / Diced Tomatoes
 
 NO OF ORDER:
 I want {num} pizzas with same options
 
-FIND STATUS OF ORDER:
-what is status of my order {order}
-what is status of order {order}
+
+TO JOIN AWARDS PROGRAM:
+ok let me in
+
+NOT TO JOIN AWARDS PROGRAM:
+maybe next time
 
 TO RESTART/REFRESH:
 restart
@@ -50,14 +60,6 @@ order {orderid} again
 re order {orderid} for me
 just re order my order {orderid}
 
-TO JOIN AWARDS PROGRAM:
-ok let me in
-
-NOT TO JOIN AWARDS PROGRAM:
-maybe next time
-
-GIVE CUSTOMER ID:
-my customer id is {customer_id}
-
-DOESN'T HAVA CUSTOMER ID:
-i don't have the membership
+FIND STATUS OF ORDER:
+what is status of my order {order}
+what is status of order {order}

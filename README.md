@@ -16,7 +16,7 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Membership and "pizza award" system
 - Order multiple pizza with the same customization in one interaction
 - Save the history of the previous order 
-- Cancel unfinished or wrong order
+- Cancel unfinish or wrong order
 - Provide a card for order clarification
 
 <b>Integration with Google API</b>
@@ -26,7 +26,7 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 
 <b>How to test it?</b>
 - Setup the Amazon Lambda environment
-- Upload 'Pizza_Lambda.zip' to Lambda
+- Upload 'Pizza_Lambda.zip' to AWS Lambda
 - Verify the schema and utterances are configured properly following alexa_schema and output
 - Load the customized slots accordingly
 - Wrap the lambda function and hook the Amazon Echo Device
@@ -35,7 +35,8 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
 - Follow the Interaction.txt to provide the right utterance  
 
 
-  * Custom Slots:  (you can add more in name type, but if you add more in any other slots, need to change ActualMenu sheet as well  
+  * Custom Slots:  
+  (you can add more different names in name type)
     * Type ----- Values  	
     * crust_type ----- Hand Tossed | Handmade | Crunchy Thin Crust | Gluten Free  
     * name_type ----- Polar | Vimmi | Quang | Harry    
@@ -45,6 +46,7 @@ This project serves the goal of SJSU CMPE-273 class in developing A Pizza Orderi
     * sauce_type ----- Robust Inspired Tomato | Hearty Marinara | Barbecue | Garlic Parmesan White | Alfredo   
     * cut_type ----- Pie | Square | Uncut  
     * topping_type ----- Pepperoni | Sliced Italian Sausage | Philly Steak | Bacon | Premium Chicken | Italian Sausage | Beef | Ham | Salami | Cheddar Cheese | Shredded Parmesan Asiago | Banana Peppers | Garlic | Pineapple | Roasted Red Peppers | Tomatoes | Hot Sauce | Feta Cheese | Shredded Provolone Cheese | Black Olives | Green Peppers | Mushrooms | Onions | Spinach | Diced Tomatoes   
+
 
 <b>Contributing Members: </b>
 - Polar Halim
